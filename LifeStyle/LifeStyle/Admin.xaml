@@ -18,19 +18,19 @@
             <Label Content="Admin" VerticalContentAlignment="Center"/>
             <Border x:Name="AdminPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right">
                 <Border.Background>
-                    <ImageBrush Stretch="Fill" ImageSource="/ProjectFiles/icon/login_icon.png"/>
+                    <ImageBrush Stretch="Fill" ImageSource="C:\Users\Student\source\repos\LifeStyle\LifeStyle\LifeStyle\LifeStyle\ProjectFiles\icon\login_icon.png"/>
                 </Border.Background>
             </Border>
         </StackPanel>
 
-        <Button x:Name="Exit" Content="Выход" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5"  Background="#EFB2D1" BorderThickness="0" Height="26" Width="55" Click="Exit_Click" >
+        <Button x:Name="Exit" Content="Выход" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Background="#EFB2D1" BorderThickness="0" Height="26" Width="69" Click="Exit_Click" Margin="0,0,10,7" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <TabControl x:Name="AdminPanel" BorderThickness="0" Margin="0,0,0,38">
+        <TabControl x:Name="AdminPanel" BorderThickness="0" Margin="0,0,0,38" FontSize="20">
 
             <TabControl.Resources>
                 <Style TargetType="TabItem">
@@ -38,15 +38,15 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="TabItem">
 
-                                <Grid Name="Panel" Margin="4,4" Width="300">
+                                <Grid Name="Panel" Margin="4,4" Width="350">
                                     <Border Name="Border" BorderThickness="2" BorderBrush="#EFB2D1" CornerRadius="10,10,10,10" Background="#EFB2D1"/>
                                     <ContentPresenter x:Name="ContentSite"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
                                         ContentSource="Header"
                                         Margin="100,20"
-                                        Width="100"
-                                        Height="20"/>
+                                                
+                                        />
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
@@ -65,12 +65,16 @@
                 </Style>
             </TabControl.Resources>
             <TabItem Header="Подтверждение" >
+
                 <Grid>
-                    <StackPanel x:Name="UsersRegistrationRequestPanel" Width="568" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Vertical" Height="766" Margin="30,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\Student\source\repos\LifeStyle\LifeStyle\LifeStyle\LifeStyle\ProjectFiles\background\services_list_background.jpg"/>
+                    </Grid.Background>
+                    <StackPanel x:Name="UsersRegistrationRequestPanel" Width="568" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Vertical" Height="766">
                         <StackPanel.Background>
                             <SolidColorBrush Color="Black" Opacity="0.6"/>
                         </StackPanel.Background>
-                        <Label Content="Запрос на регистрацию" Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20" Margin="30"/>
+                        <Label Content="Запрос на подтверждение" Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20" Margin="30"/>
                         <StackPanel Orientation="Vertical" Height="500" Width="530">
                             <StackPanel.Background>
                                 <SolidColorBrush Color="White" Opacity="0.3"/>
@@ -93,25 +97,123 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="         Данные">
+            <TabItem Header="Данные">
                 <Grid>
-                    <StackPanel x:Name="DoctorRegistrationPanel" Width="568" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Vertical" Height="766" Margin="30,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\Student\source\repos\LifeStyle\LifeStyle\LifeStyle\LifeStyle\ProjectFiles\background\services_list_background.jpg"/>
+                    </Grid.Background>
+                    <StackPanel x:Name="DoctorRegistrationPanel" Width="568" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Vertical" Height="766">
                         <StackPanel.Background>
                             <SolidColorBrush Color="Black" Opacity="0.6"/>
                         </StackPanel.Background>
-                        <Label Content="Регистрация доктора" Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20" Margin="30"/>
+                        <Label Content="Регистрация врача" Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20" Margin="30"/>
                         <StackPanel Orientation="Vertical" Height="500" Width="530">
                             <StackPanel.Background>
                                 <SolidColorBrush Color="White" Opacity="0.3"/>
                             </StackPanel.Background>
 
-                            <Button x:Name="CreateDoctor" Content="Зарегистрировать" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="280" Click="Allow_Click" Margin="20" >
-                                <Button.Resources>
-                                    <Style TargetType="{x:Type Border}">
-                                        <Setter Property="CornerRadius" Value="10"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
+
+                            <StackPanel>
+                                <Label Content="Логин" Foreground="#EFB2D1" HorizontalAlignment="Center"/>
+
+                                <TextBox  VerticalContentAlignment="Center" IsReadOnly="False"  TextWrapping="Wrap" Height="38" Width="450">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                    <TextBox.Background>
+                                        <SolidColorBrush Color="White" Opacity="0.6"/>
+                                    </TextBox.Background>
+                                </TextBox>
+                                <Label Content="Пароль" Foreground="#EFB2D1" HorizontalAlignment="Center"/>
+                                <TextBox  VerticalContentAlignment="Center" IsReadOnly="False"  TextWrapping="Wrap" Height="38"  Width="450">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                    <TextBox.Background>
+                                        <SolidColorBrush Color="White" Opacity="0.6"/>
+                                    </TextBox.Background>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                                <StackPanel>
+                                    <Label Content="Имя" Foreground="#EFB2D1" HorizontalAlignment="Center" />
+                                    <TextBox  VerticalContentAlignment="Center" IsReadOnly="False" HorizontalAlignment="Center"  TextWrapping="Wrap" Width="211" Margin="10"  Height="38">
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                        <TextBox.Background>
+                                            <SolidColorBrush Color="White" Opacity="0.6"/>
+                                        </TextBox.Background>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="Фамилия" Foreground="#EFB2D1" HorizontalAlignment="Center"/>
+                                    <TextBox  VerticalContentAlignment="Center" IsReadOnly="False" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="10"  Width="205" Height="38" >
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                        <TextBox.Background>
+                                            <SolidColorBrush Color="White" Opacity="0.6"/>
+                                        </TextBox.Background>
+                                    </TextBox>
+                                </StackPanel>
+
+
+
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <StackPanel>
+                                    <Label Content="Отчество" Foreground="#EFB2D1" HorizontalAlignment="Center" />
+                                    <TextBox  VerticalContentAlignment="Center" IsReadOnly="False" HorizontalAlignment="Center"  TextWrapping="Wrap" Width="211" Margin="10"  Height="38">
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                        <TextBox.Background>
+                                            <SolidColorBrush Color="White" Opacity="0.6"/>
+                                        </TextBox.Background>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="Должность" Foreground="#EFB2D1" HorizontalAlignment="Center"/>
+                                    <TextBox  VerticalContentAlignment="Center" IsReadOnly="False" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="10"  Width="205" Height="38" >
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                        <TextBox.Background>
+                                            <SolidColorBrush Color="White" Opacity="0.6"/>
+                                        </TextBox.Background>
+                                    </TextBox>
+                                </StackPanel>
+                            </StackPanel>
+
+
+
+                            <StackPanel>
+
+                                <Button Content="Зарегистрировать" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="280" Click="Allow_Click" Margin="20" >
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+
+                            </StackPanel>
+
                         </StackPanel>
                         <Button x:Name="EditDoctors" Content="Редактировать" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="314" Click="Deny_Click" Margin="10" >
                             <Button.Resources>
@@ -131,6 +233,93 @@
                                 <SolidColorBrush Color="White" Opacity="0.3"/>
                             </StackPanel.Background>
 
+                            <StackPanel>
+                                <Label Content="Логин" Foreground="#EFB2D1" HorizontalAlignment="Center"/>
+
+                                <TextBox  VerticalContentAlignment="Center" IsReadOnly="False"  TextWrapping="Wrap" Height="38" Width="450">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                    <TextBox.Background>
+                                        <SolidColorBrush Color="White" Opacity="0.6"/>
+                                    </TextBox.Background>
+                                </TextBox>
+                                <Label Content="Пароль" Foreground="#EFB2D1" HorizontalAlignment="Center"/>
+                                <TextBox  VerticalContentAlignment="Center" IsReadOnly="False"  TextWrapping="Wrap" Height="38"  Width="450">
+                                    <TextBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                        </Style>
+                                    </TextBox.Resources>
+                                    <TextBox.Background>
+                                        <SolidColorBrush Color="White" Opacity="0.6"/>
+                                    </TextBox.Background>
+                                </TextBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                                <StackPanel>
+                                    <Label Content="Имя" Foreground="#EFB2D1" HorizontalAlignment="Center" />
+                                    <TextBox  VerticalContentAlignment="Center" IsReadOnly="False" HorizontalAlignment="Center"  TextWrapping="Wrap" Width="211" Margin="10"  Height="38">
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                        <TextBox.Background>
+                                            <SolidColorBrush Color="White" Opacity="0.6"/>
+                                        </TextBox.Background>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="Фамилия" Foreground="#EFB2D1" HorizontalAlignment="Center"/>
+                                    <TextBox  VerticalContentAlignment="Center" IsReadOnly="False" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="10"  Width="205" Height="38" >
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                        <TextBox.Background>
+                                            <SolidColorBrush Color="White" Opacity="0.6"/>
+                                        </TextBox.Background>
+                                    </TextBox>
+                                </StackPanel>
+
+
+
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <StackPanel>
+                                    <Label Content="Отчество" Foreground="#EFB2D1" HorizontalAlignment="Center" />
+                                    <TextBox  VerticalContentAlignment="Center" IsReadOnly="False" HorizontalAlignment="Center"  TextWrapping="Wrap" Width="211" Margin="10"  Height="38">
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                        <TextBox.Background>
+                                            <SolidColorBrush Color="White" Opacity="0.6"/>
+                                        </TextBox.Background>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel>
+                                    <Label Content="Возраст" Foreground="#EFB2D1" HorizontalAlignment="Center"/>
+                                    <TextBox  VerticalContentAlignment="Center" IsReadOnly="False" HorizontalAlignment="Center"  TextWrapping="Wrap" Margin="10"  Width="205" Height="38" >
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                        <TextBox.Background>
+                                            <SolidColorBrush Color="White" Opacity="0.6"/>
+                                        </TextBox.Background>
+                                    </TextBox>
+                                </StackPanel>
+                            </StackPanel>
+
                             <Button x:Name="CreateUser" Content="Зарегистрировать" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="280" Click="Allow_Click" Margin="20" >
                                 <Button.Resources>
                                     <Style TargetType="{x:Type Border}">
@@ -148,10 +337,14 @@
                         </Button>
                     </StackPanel>
 
+
                 </Grid>
             </TabItem>
-            <TabItem Header="           ЭКП" >
+            <TabItem Header="ЭКП" >
                 <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\Student\source\repos\LifeStyle\LifeStyle\LifeStyle\LifeStyle\ProjectFiles\background\doctor_list_background.jpg"/>
+                    </Grid.Background>
                     <Rectangle Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Height="680" Width="1486" Opacity="0.8"/>
                     <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Height="680" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1486" >
                         <StackPanel x:Name="ReadOnlyECPListPlace" Orientation="Vertical" Height="680" Width="1486" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -168,6 +361,104 @@
 
                         </StackPanel>
                     </ScrollViewer>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Список">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\Student\source\repos\LifeStyle\LifeStyle\LifeStyle\LifeStyle\ProjectFiles\background\fon_spisok.jpg"/>
+                    </Grid.Background>
+                    <StackPanel Width="568" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Vertical" Height="766">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.6"/>
+                        </StackPanel.Background>
+                        <Label Content="Список врачей" Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20" Margin="30"/>
+                        <StackPanel Orientation="Vertical" Height="500" Width="530">
+                            <StackPanel.Background>
+                                <SolidColorBrush Color="White" Opacity="0.3"/>
+                            </StackPanel.Background>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button  Content="Работает" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="205" Click="Deny_Click" Margin="10" >
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                            <Button  Content="Уволен" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="204" Click="Deny_Click" >
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button  Content="Больничный" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="205" Click="Deny_Click" Margin="10" >
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                            <Button  Content="Отпуск" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="204" Click="Deny_Click" >
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel   Width="568" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Vertical" Height="766" Margin="30,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.6"/>
+                        </StackPanel.Background>
+                        <Label Content="Список пациентов" Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20" Margin="30"/>
+                        <StackPanel Orientation="Vertical" Height="500" Width="530">
+                            <StackPanel.Background>
+                                <SolidColorBrush Color="White" Opacity="0.3"/>
+                            </StackPanel.Background>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button  Content="Удалить" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="205" Click="Deny_Click" Margin="10" >
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                            <Button  Content="Заблокировать" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="204" Click="Deny_Click" >
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button  Content="Редактировать" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="205" Click="Deny_Click" Margin="10" >
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                            <Button  Content="Редактировать" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="204" Click="Deny_Click" >
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+
+                        </StackPanel>
+                    </StackPanel>
 
                 </Grid>
             </TabItem>

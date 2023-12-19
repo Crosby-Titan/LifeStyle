@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LifeStyle.WindowSwitcher;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,7 @@ namespace LifeStyle
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            Switcher.SwitchWindow(this, new LogIn());
         }
     }
 }
