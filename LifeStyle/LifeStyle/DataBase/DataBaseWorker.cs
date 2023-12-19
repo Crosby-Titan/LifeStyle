@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,26 +10,77 @@ namespace LifeStyle.DataBase
 {
     class DataBaseWorker
     {
-        private readonly NpgsqlConnection connection;
-        private readonly NpgsqlCommand command;
-        private readonly string DataBaseName;
-        private readonly string DataBaseUser;
+        private  NpgsqlConnection _connection;
+        private readonly NpgsqlCommand _command;
+        private readonly string _DataBaseName;
+        private readonly string _DataBaseUser;
+        private readonly int _Port;
+        private readonly string _Host;
 
-        public DataBaseWorker(string dataBaseName,string dataBaseUser,string password,string port,string host)
+        public DataBaseWorker(string dataBaseName,string dataBaseUser,string host, int port = 0)
         {
-
+            _DataBaseName = dataBaseName;
+            _DataBaseUser = dataBaseUser;
+            _Host = host;
+            _Port = port;
         }
 
-        public void ExecuteFromDBCommand(string commands)
+        public DataTable ExecuteFromDBCommand(string commands)
         {
-            command.CommandText = commands;
-            var reader = command.ExecuteReader();
+            _command.CommandText = commands;
+
+            var reader = _command.ExecuteReader();
+            var table = new DataTable();
+
+            foreach(var column in reader.GetColumnSchema())
+            {
+                table.Columns.Add(column.ColumnName, column.DataType);
+            }
+
+            while (reader.Read())
+            {
+                var parameters = new List<object>(reader.FieldCount);
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    parameters.Add(reader.GetValue(i));
+                }
+                table.Rows.Add(parameters.ToArray());
+            }
+
+            return table;
         }
 
         public int ExecuteIntoDBCommand(string commands)
         {
-            command.CommandText = commands;
-            return command.ExecuteNonQuery();
+            _command.CommandText = commands;
+            return _command.ExecuteNonQuery();
+        }
+
+        public bool Connect(string password)
+        {
+            try
+            {
+                _connection = new NpgsqlConnection(
+                    $"Host={_Host};" +
+                    $"Username={_DataBaseUser};" +
+                    $"Password={password};" +
+                    $"Database={_DataBaseName}"
+                    );
+
+                _connection.Open();
+
+                return true;
+            }
+            catch(NpgsqlException ex)
+            {
+                Extensions.WindowHelper.ShowErrorMessageBox($"Connection state is {_connection.State}\nError message: {ex.Message}");
+                return false;
+            }
+            catch(ArgumentException ex)
+            {
+                Extensions.WindowHelper.ShowErrorMessageBox($"Connection state is {_connection.State}\nError message: {ex.Message}");
+                return false;
+            }
         }
     }
 }
