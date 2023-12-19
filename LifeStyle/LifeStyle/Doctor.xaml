@@ -1,0 +1,274 @@
+﻿<Window x:Class="LifeStyle.Doctor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LifeStyle"
+        mc:Ignorable="d"
+        Title="Doctor" Height="900" Width="1600"
+        MinHeight="900"
+        MinWidth="1600">
+    <Window.Background>
+        <SolidColorBrush Color="#7EA3C8"></SolidColorBrush>
+    </Window.Background>
+
+    <Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="56" Width="150" Margin="0,0,10,0">
+            <Label Content="doctor_name" VerticalContentAlignment="Center"/>
+            <Border x:Name="DoctorPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right">
+                <Border.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="/ProjectFiles/icon/login_icon.png"/>
+                </Border.Background>
+            </Border>
+        </StackPanel>
+        <TabControl x:Name="DoctorPanel" BorderThickness="0" Margin="0,0,0,38">
+
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+
+                                <Grid Name="Panel" Margin="4,4" Width="300">
+                                    <Border Name="Border" BorderThickness="2" BorderBrush="#EFB2D1" CornerRadius="10,10,10,10" Background="#EFB2D1"/>
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="100,20"
+                                        Width="100"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+
+                                        <Setter TargetName="Border" Property="Background" Value="#D39FB9"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+
+                                        <Setter TargetName="Border" Property="Background" Value="#EFB2D1" />
+
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Профиль врача" >
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="C:\Users\CrosbyTitan\source\repos\LifeStyle\LifeStyle\ProjectFiles\background\services_list_background.jpg"/>
+                    </Grid.Background>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel x:Name="profile" Width="568" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Vertical" Height="766" Margin="30,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.6"/>
+                        </StackPanel.Background>
+                        <StackPanel Height="200" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Width="568" Margin="0,20" Opacity="1">
+                            <Image x:Name="DoctorProfileImage" Width="150" Height="200" Margin="20,0" Source="C:\Users\CrosbyTitan\source\repos\LifeStyle\LifeStyle\ProjectFiles\icon\default_user_profile_image.jpg"  Stretch="Fill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <StackPanel x:Name="DoctorProfileInformationPanel" Height="200" Width="370" Orientation="Vertical">
+                                <StackPanel.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.2"/>
+                                </StackPanel.Background>
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <Label Content="Имя            "/>
+                                    <TextBox VerticalContentAlignment="Center" IsReadOnly="true" x:Name="DoctorFirstName" Text="doctor_first_name" TextWrapping="Wrap" Width="200" Background="#EFB2D1">
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <Label Content="Фамилия    "/>
+                                    <TextBox VerticalContentAlignment="Center" IsReadOnly="true" x:Name="DoctorSecondName"  Text="doctor_second_name" TextWrapping="Wrap" Width="200" Background="#EFB2D1">
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <Label Content="Отчество   "/>
+                                    <TextBox VerticalContentAlignment="Center" IsReadOnly="true" x:Name="DoctorThirdName" Text="doctor_third_name" TextWrapping="Wrap" Width="200" Background="#EFB2D1">
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                    </TextBox>
+
+
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <Label Content="Должность"/>
+                                    <TextBox VerticalContentAlignment="Center" IsReadOnly="true" x:Name="DoctorSpecialization" Text="specialization" TextWrapping="Wrap" Width="200" Background="#EFB2D1">
+                                        <TextBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                    </TextBox>
+
+
+                                </StackPanel>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="График работы" Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20" Margin="0,20,0,0"/>
+                            <StackPanel x:Name="DoctorWorkingGraph" Orientation="Vertical" Height="312" Margin="20">
+                                <StackPanel.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.8"/>
+                                </StackPanel.Background>
+                            </StackPanel>
+                        </StackPanel>
+                        <Button x:Name="RedSchedule" FontSize="20" Content="Редактировать график работы"  Background="#EFB2D1" BorderThickness="0" Height="45" Width="303" Click="RedSchedule_Click" >
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,0,0,0" Height="56"  Grid.Column="1" Grid.Row="0">
+
+                    </StackPanel>
+                    <StackPanel x:Name="DoctorCabinetPlace" Orientation="Vertical" Width="270" Height="140" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="2" Margin="20">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.6"/>
+                        </StackPanel.Background>
+                        <Label Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20">
+                            Мой кабинет
+                        </Label>
+                        <TextBox x:Name="DoctorCabinet" VerticalContentAlignment="Center" IsReadOnly="true"  TextWrapping="Wrap" Height="39" Width="102" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </TextBox.Resources>
+                            <TextBox.Background>
+                                <SolidColorBrush Color="White" Opacity="0.6"/>
+                            </TextBox.Background>
+                        </TextBox>
+                        <Button x:Name="cab" Content="Сменить кабинет" FontSize="13"  Background="#EFB2D1" BorderThickness="0" Height="26" Width="129" Click="cab_Click" Margin="10" >
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                    </StackPanel>
+                    <StackPanel x:Name="CurrentVisitPlace" Orientation="Vertical" Margin="356,225,27,26" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.6"/>
+                        </StackPanel.Background>
+                        <Label Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20" Content="Действующий прием"/>
+                        <TextBox x:Name="CurrentVisits" VerticalContentAlignment="Center" IsReadOnly="true" TextWrapping="Wrap" Height="39" Width="605" >
+                            <TextBox.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </TextBox.Resources>
+                            <TextBox.Background>
+                                <SolidColorBrush Color="White" Opacity="0.6"/>
+                            </TextBox.Background>
+                        </TextBox>
+                        <Button x:Name="PriemKn" Content="Завершить" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="228" Click="PriemKn_Click" Margin="10" >
+                            <Button.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                    </StackPanel>
+
+
+
+
+
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="            ЭКП" HorizontalContentAlignment="Center">
+                <Grid>
+                    <Rectangle Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Height="680" Width="1486" Opacity="0.8"/>
+                    <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Height="680" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1486" >
+                        <StackPanel x:Name="ECPListPlace" Orientation="Vertical" Height="680" Width="1486" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <DataGrid x:Name="ECPList" BorderBrush="Transparent"  AutoGenerateColumns="False" RowHeight="40" MaxHeight="650">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="№"  Width="80" />
+                                    <DataGridTextColumn Header="ФИО пациента" Width="300" />
+                                    <DataGridHyperlinkColumn Header="Дата" Width="300" />
+                                    <DataGridTextColumn Header="Анализ"  Width="300" />
+                                    <DataGridTextColumn Header="Врач"  Width="300" />
+                                    <DataGridHyperlinkColumn Header="Результат" Width="200" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                    <Button x:Name="EditECP" Content="Редактировать ЭКП" FontSize="20" Width="203" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Background="#EFB2D1" BorderThickness="0" Click="EditECP_Click" Margin="10">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Список приемов">
+                <Grid>
+                    <Rectangle Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Height="680" Width="1486" Opacity="0.8"/>
+                    <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Height="680" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1486" >
+                        <StackPanel x:Name="VisitListPlace" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Height="680" Width="1486">
+                            <DataGrid x:Name="DoctorsVisit" BorderBrush="Transparent"  AutoGenerateColumns="False" RowHeight="40" MaxHeight="650" Width="1486">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="№"  Width="80" />
+                                    <DataGridTextColumn Header="ФИО пациента" Width="300" />
+                                    <DataGridHyperlinkColumn Header="Дата" Width="300" />
+                                    <DataGridTextColumn Header="Жалоба"  Width="700" />
+                                    <DataGridTextColumn Header="Кабинет"  Width="115" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                    <Button x:Name="EditVisits" Content="Изменить приём" FontSize="20" Width="203" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Background="#EFB2D1" BorderThickness="0" Click="EditVisits_Click" Margin="10">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+
+
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+        <Button x:Name="Exit" Content="Выход" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5"  Background="#EFB2D1" BorderThickness="0" Height="26" Width="55" Click="Exit_Click" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Window>
