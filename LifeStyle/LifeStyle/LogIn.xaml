@@ -16,7 +16,7 @@
                 <Label Content="Вход в личный кабинет" FontSize="24" HorizontalAlignment="Center"/>
                 <StackPanel Height="200" Orientation="Vertical">
                     <Label Content="Логин" FontSize="20" HorizontalAlignment="Left" Margin="100,0"/>
-                    <TextBox Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Center">
+                    <TextBox x:Name="Login" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>
@@ -24,7 +24,7 @@
                         </TextBox.Resources>
                     </TextBox>
                     <Label Content="Пароль" FontSize="20" HorizontalAlignment="Left" Margin="100,0"/>
-                    <TextBox Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                    <TextBox x:Name="Password" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>

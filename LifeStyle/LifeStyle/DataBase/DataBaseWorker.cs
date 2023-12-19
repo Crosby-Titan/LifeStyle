@@ -27,6 +27,8 @@ namespace LifeStyle.DataBase
             _Port = port;
         }
 
+        public string LastQueryText { get { return _command.CommandText; } }
+
         public DataTable ExecuteFromDBCommand(string commands)
         {
             _command.CommandText = commands;

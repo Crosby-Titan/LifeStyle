@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace LifeStyle.ProjectFiles.ProjectEntities
 {
-    public class Entitiy
+    public class Entitiy: ICloneable
     {
         protected int _ID;
         protected bool _IsSuperUser;
-        protected readonly string _Login;
         public Entitiy()
         {
             GenerateEntityID();
@@ -27,8 +26,16 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
             return $"ID entity: {ID}\nIs Entity super user: {IsSuperUser}";
         }
 
+        public virtual object Clone()
+        {
+            return new Entitiy()
+            {
+                _ID = this.GetHashCode(),
+                _IsSuperUser = this.IsSuperUser
+            };
+        }
+
         public int ID { get { return _ID; } }
         public bool IsSuperUser { get { return _IsSuperUser; } }
-        public string Login { get { return _Login; } }
     }
 }

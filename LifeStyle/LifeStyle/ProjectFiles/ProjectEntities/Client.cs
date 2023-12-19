@@ -7,23 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace LifeStyle.ProjectEntities
+namespace LifeStyle.ProjectFiles.ProjectEntities
 {
-    public class Client: Entitiy
+    public class Client: Entitiy, ICloneable
     {
         private string[] _FullName;
-        private string _Gender;
         private string _Email;
+        private DateOnly _BirthDay;
         private IDictionary<string, VisitInformation> _VisitHistory;
 
-        public Client(string[] fullName, string gender,string login) : base()
+        public Client(string[] fullName, DateOnly birthday,string login) : base()
         {
             _FullName = fullName;
-            _Gender = gender;
             _Email = login;
+            _BirthDay = birthday;
             _VisitHistory = new Dictionary<string, VisitInformation>();
         }
-        public string Gender { get { return _Gender; } }
         public string FullName { get { return String.Join(" ", _FullName); } }
         public string Email { get { return _Email; } }   
 
@@ -34,6 +33,16 @@ namespace LifeStyle.ProjectEntities
                 _VisitHistory.Add(visitName, visitInformation);
             }
         }
+
+        public override object Clone()
+        {
+            return new Client(_FullName.Clone() as string[], _BirthDay, _Email.Clone() as string)
+            {
+                _VisitHistory = new Dictionary <string, VisitInformation>(_VisitHistory)
+            };
+
+        }
+
         public VisitInformation GetVisitInformation(string visitName)
         {
             if (_VisitHistory.ContainsKey(visitName))

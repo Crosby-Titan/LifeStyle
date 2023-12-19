@@ -6,7 +6,6 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using LifeStyle.DataBase;
-using LifeStyle.ProjectEntities;
 using LifeStyle.ProjectFiles.ProjectEntities;
 
 namespace LifeStyle.ProjectFiles.Extensions
@@ -25,16 +24,73 @@ namespace LifeStyle.ProjectFiles.Extensions
             return true;
         }
 
-        public static Entitiy InitializeEntity(DataTable entity)
+        public static Entitiy InitializeClient(DataTable entity)
         {
-            var parameters = new List<string>();
+            var parameters = new Dictionary<string, string>();
 
-            foreach(var column in entity.Columns)
+            foreach(DataColumn column in entity.Columns)
             {
-                parameters
+                switch(column.ColumnName)
+                {
+                    case "fullname":
+                    case "login":
+                    case "date_of_birth":
+                        parameters.Add(column.ColumnName,entity.Rows[0][column.Ordinal].ToString());
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            return new LifeStyle.ProjectEntities.Client()
+            return new ProjectEntities.Client(
+                parameters["fullname"].Split(' '),
+                DateOnly.Parse(parameters["date_of_birth"]),
+                parameters["login"]);
+        }
+
+        public static Entitiy InitializeDoctor(DataTable entity)
+        {
+            var parameters = new Dictionary<string, string>();
+
+            foreach (DataColumn column in entity.Columns)
+            {
+                switch (column.ColumnName)
+                {
+                    case "fullname":
+                    case "login":
+                    case "cabinet_number":
+                    case "specialization":
+                        parameters.Add(column.ColumnName, entity.Rows[0][column.Ordinal].ToString());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return new ProjectEntities.Doctor(
+                parameters["fullname"].Split(' '),
+                parameters["specialization"],
+                parameters["cabinet_number"],
+                parameters["login"]);
+        }
+
+        public static Entitiy InitializeAdmin(DataTable entity)
+        {
+            var parameters = new Dictionary<string, string>();
+
+            foreach (DataColumn column in entity.Columns)
+            {
+                switch (column.ColumnName)
+                {
+                    case "login":
+                        parameters.Add(column.ColumnName, entity.Rows[0][column.Ordinal].ToString());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return new ProjectEntities.Admin(parameters["login"]);
         }
     }
 }

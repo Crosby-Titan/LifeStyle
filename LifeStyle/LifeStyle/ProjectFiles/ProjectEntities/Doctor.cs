@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LifeStyle.ProjectEntities
+namespace LifeStyle.ProjectFiles.ProjectEntities
 {
     public class Doctor: Entitiy, ICloneable
     {
@@ -18,11 +18,12 @@ namespace LifeStyle.ProjectEntities
         private int _Experience;
         private IDictionary<ScheduleDay,Schedule> _WorkSchedule;
         private ICollection<Client> _PinnedPatients;
-        public Doctor(string[] fullName,string specialization,string cabinetNumber)
+        public Doctor(string[] fullName,string specialization,string cabinetNumber,string login)
         {
             _FullName = fullName;
             _Specialization = specialization;
             _CabinetNumber = cabinetNumber;
+            _Email = login;
             _PinnedPatients = new LinkedList<Client>();
             _WorkSchedule = new Dictionary<ScheduleDay, Schedule>();
         }
@@ -89,13 +90,12 @@ namespace LifeStyle.ProjectEntities
             return null;
         }
 
-        public object Clone()
+        public override object Clone()
         {
-            return new Doctor(_FullName, _Specialization, _CabinetNumber)
+            return new Doctor(_FullName, _Specialization, _CabinetNumber,_Email)
             {
                 _IsSuperUser = _IsSuperUser,
                 _DoctorsPhoto = new Uri(_DoctorsPhoto.OriginalString),
-                _Email = _Email,
                 _ID = _ID,
                 _Experience = _Experience,
                 _PinnedPatients = new LinkedList<Client>(_PinnedPatients),

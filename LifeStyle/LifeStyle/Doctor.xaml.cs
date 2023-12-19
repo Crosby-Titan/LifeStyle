@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LifeStyle.DataBase;
+using LifeStyle.ProjectFiles.ProjectEntities;
 
 
 namespace LifeStyle
@@ -23,15 +24,17 @@ namespace LifeStyle
     /// </summary>
     public partial class Doctor : Window
     {
+        private ProjectFiles.ProjectEntities.Doctor _Doctor;
         public Doctor()
         {
             InitializeComponent();
-            //WindowHelper.SetWindowBackground(this, "services_list_background.jpg");
-            //WindowHelper.SetPanelBackground((DoctorPanel.Items[0] as TabItem).Content as Grid, "services_list_background.jpg");
-
         }
 
        
+        public Doctor(ProjectFiles.ProjectEntities.Doctor doctor): this()
+        {
+            _Doctor = doctor.Clone() as ProjectFiles.ProjectEntities.Doctor;
+        }
 
         private void RedSchedule_Click(object sender, RoutedEventArgs e)
         {

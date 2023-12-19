@@ -15,6 +15,7 @@ using LifeStyle.WindowSwitcher;
 using LifeStyle.Paths;
 using LifeStyle.Extensions;
 using LifeStyle.DataBase;
+using LifeStyle.ProjectFiles.Extensions;
 
 namespace LifeStyle
 {
@@ -40,7 +41,14 @@ namespace LifeStyle
             switch (ListLoginAs.SelectedItem.ToString())
             {
                 case "Пациент":
-                    Switcher.SwitchWindow(this, new Client());
+                    if (ProfileHelper.Exists(this.Login.Text))
+                    {
+                        var data = DBHelper.DbWorker.ExecuteFromDBCommand(DBHelper.DbWorker.LastQueryText);
+
+                        Switcher.SwitchWindow(this, new Client(ProfileHelper.InitializeClient(data)));
+                    }
+                    else
+                        WindowHelper.ShowErrorMessageBox("Такого пользователя не существует!");
                     break;
                 case "Врач":
                     Switcher.SwitchWindow(this, new Doctor());

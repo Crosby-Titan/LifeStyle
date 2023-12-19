@@ -20,9 +20,15 @@ namespace LifeStyle
     /// </summary>
     public partial class Admin : Window
     {
+        private ProjectFiles.ProjectEntities.Admin _Admin;
         public Admin()
         {
             InitializeComponent();
+        }
+
+        public Admin(ProjectFiles.ProjectEntities.Entitiy admin): this()
+        {
+            _Admin = admin.Clone() as ProjectFiles.ProjectEntities.Admin;
         }
 
         private void Allow_Click(object sender, RoutedEventArgs e)

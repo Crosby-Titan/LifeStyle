@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LifeStyle.ProjectEntities
+namespace LifeStyle.ProjectFiles.ProjectEntities
 {
-    class Admin: Entitiy
+    public class Admin: Entitiy, ICloneable
     {
         private string _Login;
 
@@ -18,5 +18,10 @@ namespace LifeStyle.ProjectEntities
         }
 
         public string Login { get { return _Login; } }
+
+        public override object Clone()
+        {
+            return new Admin(_Login.Clone() as string);
+        }
     }
 }

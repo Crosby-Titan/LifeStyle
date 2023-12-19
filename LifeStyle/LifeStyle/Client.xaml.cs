@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using LifeStyle.Extensions;
 using LifeStyle.WindowSwitcher;
 using LifeStyle.DataBase;
-
+using LifeStyle.ProjectFiles.ProjectEntities;
 
 namespace LifeStyle
 {
@@ -23,12 +23,17 @@ namespace LifeStyle
     /// </summary>
     public partial class Client : Window
     {
+        private ProjectFiles.ProjectEntities.Client _Client;
         public Client()
         {
             InitializeComponent();
             InitializeWindowComponent();
         }
 
+        public Client(Entitiy client): this()
+        {
+            _Client = client.Clone() as ProjectFiles.ProjectEntities.Client;
+        }
 
         public void SetPanelBackground(ICollection<string> controlsName, ICollection<string> backgroundFile)
         {
