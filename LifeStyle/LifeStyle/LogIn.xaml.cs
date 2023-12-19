@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using LifeStyle.WindowSwitcher;
 using LifeStyle.Paths;
 using LifeStyle.Extensions;
+using LifeStyle.DataBase;
 
 namespace LifeStyle
 {

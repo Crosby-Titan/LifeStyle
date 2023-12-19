@@ -10,7 +10,7 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
     {
         protected int _ID;
         protected bool _IsSuperUser;
-
+        protected readonly string _Login;
         public Entitiy()
         {
             GenerateEntityID();
@@ -29,5 +29,6 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
 
         public int ID { get { return _ID; } }
         public bool IsSuperUser { get { return _IsSuperUser; } }
+        public string Login { get { return _Login; } }
     }
 }

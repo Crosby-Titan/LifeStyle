@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 
 namespace LifeStyle.DataBase
 {
-    class DataBaseWorker
+    public class DataBaseWorker
     {
         private  NpgsqlConnection _connection;
         private readonly NpgsqlCommand _command;
@@ -16,6 +17,7 @@ namespace LifeStyle.DataBase
         private readonly string _DataBaseUser;
         private readonly int _Port;
         private readonly string _Host;
+        private ConnectionStatus _ConnectionStatus;
 
         public DataBaseWorker(string dataBaseName,string dataBaseUser,string host, int port = 0)
         {
@@ -69,15 +71,19 @@ namespace LifeStyle.DataBase
 
                 _connection.Open();
 
+                _ConnectionStatus = ConnectionStatus.Connected;
+
                 return true;
             }
             catch(NpgsqlException ex)
             {
+                _ConnectionStatus = ConnectionStatus.Broken;
                 Extensions.WindowHelper.ShowErrorMessageBox($"Connection state is {_connection.State}\nError message: {ex.Message}");
                 return false;
             }
             catch(ArgumentException ex)
             {
+                _ConnectionStatus = ConnectionStatus.Broken;
                 Extensions.WindowHelper.ShowErrorMessageBox($"Connection state is {_connection.State}\nError message: {ex.Message}");
                 return false;
             }

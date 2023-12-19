@@ -45,8 +45,7 @@
                                         HorizontalAlignment="Center"
                                         ContentSource="Header"
                                         Margin="100,20"
-                                        Width="100"
-                                        Height="20"/>
+                                        />
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
@@ -93,7 +92,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="         Данные">
+            <TabItem Header="Данные">
                 <Grid>
                     <StackPanel x:Name="DoctorRegistrationPanel" Width="568" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Vertical" Height="766" Margin="30,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
                         <StackPanel.Background>
@@ -150,7 +149,7 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="           ЭКП" >
+            <TabItem Header="ЭКП" >
                 <Grid>
                     <Rectangle Fill="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Height="680" Width="1486" Opacity="0.8"/>
                     <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Height="680" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1486" >

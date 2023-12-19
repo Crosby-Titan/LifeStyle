@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LifeStyle.Extensions;
 using LifeStyle.WindowSwitcher;
+using LifeStyle.DataBase;
+
 
 namespace LifeStyle
 {

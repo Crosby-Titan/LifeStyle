@@ -16,10 +16,11 @@ namespace LifeStyle.ProjectEntities
         private string _Email;
         private IDictionary<string, VisitInformation> _VisitHistory;
 
-        public Client(string[] fullName, string gender) : base()
+        public Client(string[] fullName, string gender,string login) : base()
         {
             _FullName = fullName;
             _Gender = gender;
+            _Email = login;
             _VisitHistory = new Dictionary<string, VisitInformation>();
         }
         public string Gender { get { return _Gender; } }
