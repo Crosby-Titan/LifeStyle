@@ -31,7 +31,7 @@ namespace LifeStyle
         }
 
        
-        public Doctor(ProjectFiles.ProjectEntities.Doctor doctor): this()
+        public Doctor(ProjectFiles.ProjectEntities.Entitiy doctor): this()
         {
             _Doctor = doctor.Clone() as ProjectFiles.ProjectEntities.Doctor;
         }

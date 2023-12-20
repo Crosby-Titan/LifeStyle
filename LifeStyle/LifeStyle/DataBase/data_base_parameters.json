@@ -1,6 +1,6 @@
-﻿{
-  "Host": "localhost",
-  "Username": "postgres",
-  "Password": "0825475",
-  "Database": "LifeStyle"
+{
+   "Host": "localhost",
+   "Username": "postgres",
+   "Password": "qwerasty312",
+   "Database": "Lifestyle"
 }

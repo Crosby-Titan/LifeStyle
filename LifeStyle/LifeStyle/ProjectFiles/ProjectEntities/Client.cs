@@ -13,10 +13,10 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
     {
         private string[] _FullName;
         private string _Email;
-        private DateOnly _BirthDay;
+        private DateTime _BirthDay;
         private IDictionary<string, VisitInformation> _VisitHistory;
 
-        public Client(string[] fullName, DateOnly birthday,string login) : base()
+        public Client(string[] fullName, DateTime birthday,string login) : base()
         {
             _FullName = fullName;
             _Email = login;

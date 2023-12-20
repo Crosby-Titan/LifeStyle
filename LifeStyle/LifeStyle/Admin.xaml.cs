@@ -43,7 +43,7 @@ namespace LifeStyle
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            WindowSwitcher.Switcher.SwitchWindow(this, new LogIn());
         }
     }
 }

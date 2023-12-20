@@ -14,11 +14,40 @@ namespace LifeStyle.ProjectFiles.Extensions
     {
         public static bool Exists(string login)
         {
+            return (IsDoctorExists(login) || IsClientExists(login) || IsAdminExists(login));
+        }
+
+        private static bool IsDoctorExists(string login)
+        {
+            var result = DBHelper.DbWorker.ExecuteFromDBCommand(
+                $"SELECT Login FROM Doctor" +
+                $" WHERE Login = \'{login}\' LIMIT 1;");
+
+            if (result.Rows.Count < 1)
+                return false;
+
+            return true;
+        }
+
+        private static bool IsAdminExists(string login)
+        {
+            var result = DBHelper.DbWorker.ExecuteFromDBCommand(
+                $"SELECT Login FROM Admin_" +
+                $" WHERE Login = \'{login}\' LIMIT 1;");
+
+            if (result.Rows.Count < 1)
+                return false;
+
+            return true;
+        }
+
+        private static bool IsClientExists(string login)
+        {
             var result = DBHelper.DbWorker.ExecuteFromDBCommand(
                 $"SELECT Login FROM Patient_personal_account" +
-                $"WHERE Login = {login} LIMIT 1;");
+                $" WHERE Login = \'{login}\' LIMIT 1;");
 
-            if(result.Rows.Count != 1)
+            if (result.Rows.Count < 1)
                 return false;
 
             return true;
@@ -44,7 +73,7 @@ namespace LifeStyle.ProjectFiles.Extensions
 
             return new ProjectEntities.Client(
                 parameters["fullname"].Split(' '),
-                DateOnly.Parse(parameters["date_of_birth"]),
+                DateTime.Parse(parameters["date_of_birth"]),
                 parameters["login"]);
         }
 

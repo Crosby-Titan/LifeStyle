@@ -25,6 +25,7 @@ namespace LifeStyle.DataBase
             _DataBaseUser = dataBaseUser;
             _Host = host;
             _Port = port;
+            _command = new NpgsqlCommand();
         }
 
         public string LastQueryText { get { return _command.CommandText; } }
@@ -51,6 +52,8 @@ namespace LifeStyle.DataBase
                 table.Rows.Add(parameters.ToArray());
             }
 
+            reader.Close();
+
             return table;
         }
 
@@ -72,6 +75,8 @@ namespace LifeStyle.DataBase
                     );
 
                 _connection.Open();
+
+                _command.Connection = _connection;
 
                 _ConnectionStatus = ConnectionStatus.Connected;
 

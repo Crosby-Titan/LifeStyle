@@ -153,7 +153,7 @@ namespace LifeStyle.Extensions
             return serviceCard;
         }
 
-        public static UIElement CreateDoctorCard(ProjectEntities.Doctor doctor)
+        public static UIElement CreateDoctorCard(ProjectFiles.ProjectEntities.Doctor doctor)
         {
             XamlReader reader = new XamlReader();
 

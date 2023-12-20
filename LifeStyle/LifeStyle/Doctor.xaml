@@ -57,7 +57,7 @@
             <TabItem Header="Профиль врача" >
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="C:\Users\CrosbyTitan\source\repos\LifeStyle\LifeStyle\ProjectFiles\background\services_list_background.jpg"/>
+                        <ImageBrush ImageSource="/ProjectFiles/background/services_list_background.jpg"/>
                     </Grid.Background>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -73,7 +73,7 @@
                             <SolidColorBrush Color="Black" Opacity="0.6"/>
                         </StackPanel.Background>
                         <StackPanel Height="200" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Width="568" Margin="0,20" Opacity="1">
-                            <Image x:Name="DoctorProfileImage" Width="150" Height="200" Margin="20,0" Source="C:\Users\CrosbyTitan\source\repos\LifeStyle\LifeStyle\ProjectFiles\icon\default_user_profile_image.jpg"  Stretch="Fill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Image x:Name="DoctorProfileImage" Width="150" Height="200" Margin="20,0" Source="ProjectFiles/icon/default_user_profile_image.jpg"  Stretch="Fill" RenderOptions.BitmapScalingMode="HighQuality"/>
                             <StackPanel x:Name="DoctorProfileInformationPanel" Height="200" Width="370" Orientation="Vertical">
                                 <StackPanel.Background>
                                     <SolidColorBrush Color="White" Opacity="0.2"/>

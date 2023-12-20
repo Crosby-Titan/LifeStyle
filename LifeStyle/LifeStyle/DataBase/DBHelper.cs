@@ -1,10 +1,12 @@
-﻿using System;
+﻿using LifeStyle.Paths;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace LifeStyle.DataBase
 {
@@ -23,7 +25,15 @@ namespace LifeStyle.DataBase
 
         private static DBParameters LoadDBParameters()
         {
-            return JsonSerializer.Deserialize<DBParameters>(File.OpenRead(""));
+            using var stream = File.OpenRead(Path.Combine(PathWorker.DataBase,"data_base_parameters.json"));
+
+            var bytes = new Span<byte>(new byte[stream.Length]);
+
+            stream.Read(bytes);
+
+            string json = Encoding.UTF8.GetString(bytes);
+
+            return JsonSerializer.Deserialize<DBParameters>(json);
         }
 
         private static void InitializeDBWorker(DBParameters parameters)
@@ -36,7 +46,10 @@ namespace LifeStyle.DataBase
 
         private static void ConnectWithDB(string password)
         {
-            DbWorker.Connect(password);
+            if (!DbWorker.Connect(password))
+                Environment.Exit(-1);
+            
         }
+
     }
 }

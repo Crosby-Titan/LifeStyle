@@ -18,7 +18,7 @@
             <Label Content="Admin" VerticalContentAlignment="Center"/>
             <Border x:Name="AdminPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right">
                 <Border.Background>
-                    <ImageBrush Stretch="Fill" ImageSource="/ProjectFiles/icon/login_icon.png"/>
+                    <ImageBrush Stretch="Fill" ImageSource="C:\Users\Student\Source\Repos\LifeStyle\LifeStyle\LifeStyle\ProjectFiles\icon\login_icon.png"/>
                 </Border.Background>
             </Border>
         </StackPanel>

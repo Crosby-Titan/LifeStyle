@@ -37,24 +37,32 @@ namespace LifeStyle
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (!ProfileHelper.Exists(this.Login.Text))
+            {
+                WindowHelper.ShowErrorMessageBox("Такого пользователя не существует!");
+                return;
+            }
 
             switch (ListLoginAs.SelectedItem.ToString())
             {
                 case "Пациент":
-                    if (ProfileHelper.Exists(this.Login.Text))
-                    {
-                        var data = DBHelper.DbWorker.ExecuteFromDBCommand(DBHelper.DbWorker.LastQueryText);
 
-                        Switcher.SwitchWindow(this, new Client(ProfileHelper.InitializeClient(data)));
-                    }
-                    else
-                        WindowHelper.ShowErrorMessageBox("Такого пользователя не существует!");
+                    var data1 = DBHelper.DbWorker.ExecuteFromDBCommand("SELECT fullname, login, date_of_birth FROM patient_personal_account");
+
+                     Switcher.SwitchWindow(this, new Client(ProfileHelper.InitializeClient(data1)));
+
                     break;
                 case "Врач":
-                    Switcher.SwitchWindow(this, new Doctor());
+                    var data2 = DBHelper.DbWorker.ExecuteFromDBCommand("SELECT fullname, login, cabinet_number, specialization FROM Doctor");
+
+                    Switcher.SwitchWindow(this, new Doctor(ProfileHelper.InitializeDoctor(data2)));
+
                     break;
                 case "Админ":
-                    Switcher.SwitchWindow(this, new Admin());
+                    var data3 = DBHelper.DbWorker.ExecuteFromDBCommand("SELECT login FROM Admin_");
+
+                    Switcher.SwitchWindow(this, new Admin(ProfileHelper.InitializeAdmin(data3)));
+
                     break;
                 default:
                     WindowHelper.ShowErrorMessageBox("Не выбран ни один из доступных вариантов входа!");
