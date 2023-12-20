@@ -14,7 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LifeStyle.DataBase;
-
+using LifeStyle.ProjectFiles.ProjectEntities;
+using LifeStyle.ProjectFiles.Extensions;
 
 namespace LifeStyle
 {
@@ -24,6 +25,7 @@ namespace LifeStyle
     public partial class Registration : Window
     {
         private IDictionary<string,Page> _RegistrationPages;
+        private ClientRegistrationInfo _RegistrationInfo;
         public Registration()
         {
             InitializeComponent();
@@ -60,21 +62,26 @@ namespace LifeStyle
             _RegistrationPages.Add(nameof(FirstRegistration), firstPage);
             _RegistrationPages.Add(nameof(PersonalDataInput), secondPage);
         }
-        private void SetNextPage()
+        private void SetNextPage(ClientRegistrationInfo registrationInfo)
         {
+            _RegistrationInfo = registrationInfo;
+
             RegistrationPageHost.Navigate(_RegistrationPages[nameof(PersonalDataInput)]);
         }
 
-        private void RegistrationEnded()
+        private void RegistrationEnded(ClientRegistrationInfo registrationInfo)
         {
-            Switcher.SwitchWindow(this, new Client());
+            _RegistrationInfo.Passport = registrationInfo.Passport;
+
+            ProfileHelper.RegistrationClient(_RegistrationInfo);
+
+            Switcher.SwitchWindow(this, new LogIn());
         }
 
         private void SetWindowBackground(string filename)
         {
             WindowHelper.SetWindowBackground(this, filename);
         }
-
 
     }
 }

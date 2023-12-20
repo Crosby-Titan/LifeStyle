@@ -45,5 +45,25 @@ namespace LifeStyle
         {
             WindowSwitcher.Switcher.SwitchWindow(this, new LogIn());
         }
+
+        private void EditDoctors_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditUsers_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RegDoctor_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RegUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

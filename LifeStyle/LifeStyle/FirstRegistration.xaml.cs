@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LifeStyle.ProjectFiles.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,18 +19,24 @@ namespace LifeStyle
     /// <summary>
     /// Логика взаимодействия для FirstRegistration.xaml
     /// </summary>
-    public partial class FirstRegistration : Page
+    public partial class FirstRegistration : Page, IRegistrationEvent
     {
-        public delegate void NotifyParent();
-        public event NotifyParent notify;
         public FirstRegistration()
         {
             InitializeComponent();
         }
 
+        public event IRegistrationEvent.NotifyParent notify;
+
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            notify.Invoke();
+            notify.Invoke(new ProjectFiles.ProjectEntities.ClientRegistrationInfo
+            {
+                Email = user_email_address.Text,
+                BirthDay = new DateTime(user_date_of_birth.SelectedDate.Value.Ticks),
+                FullName = new[]{user_name.Text,user_second_name.Text,user_third_name.Text },
+                PasswordHashCode = user_password.GetHashCode(),
+            });
         }
     }
 }

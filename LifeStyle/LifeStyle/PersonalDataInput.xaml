@@ -22,7 +22,7 @@
                             </Style>
                         </TextBox.Resources>
                     </TextBox>
-                    <Label Content="Пароль" FontSize="20" HorizontalAlignment="Left" Margin="100,0"/>
+                    <Label Content="Номер паспорта" FontSize="20" HorizontalAlignment="Left" Margin="100,0"/>
                     <TextBox x:Name="registration_passport_number" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">

@@ -57,14 +57,20 @@ namespace LifeStyle.ProjectFiles.Extensions
         {
             var parameters = new Dictionary<string, string>();
 
-            foreach(DataColumn column in entity.Columns)
+            foreach (DataColumn column in entity.Columns)
             {
-                switch(column.ColumnName)
+                switch (column.ColumnName)
                 {
                     case "fullname":
                     case "login":
                     case "date_of_birth":
-                        parameters.Add(column.ColumnName,entity.Rows[0][column.Ordinal].ToString());
+                    case "smpnumber":
+                    case "home_address":
+                    case "phone_number":
+                    case "passport_series":
+                    case "number_passport":
+                    case "passport_issued_by":
+                        parameters.Add(column.ColumnName, entity.Rows[0][column.Ordinal].ToString());
                         break;
                     default:
                         break;
@@ -74,7 +80,15 @@ namespace LifeStyle.ProjectFiles.Extensions
             return new ProjectEntities.Client(
                 parameters["fullname"].Split(' '),
                 DateTime.Parse(parameters["date_of_birth"]),
-                parameters["login"]);
+                parameters["login"], new Passport
+                {
+                    Address = parameters["home_address"],
+                    From = parameters["passport_issued_by"],
+                    PassportNumber = parameters["number_passport"],
+                    PassportSeries = parameters["passport_series"],
+                    PhoneNumber = parameters["phone_number"],
+                    SMPNumber = parameters["smpnumber"]
+                });
         }
 
         public static Entitiy InitializeDoctor(DataTable entity)
@@ -120,6 +134,42 @@ namespace LifeStyle.ProjectFiles.Extensions
             }
 
             return new ProjectEntities.Admin(parameters["login"]);
+        }
+
+        public static string GetClientStatus(UserStatus status)
+        {
+            switch(status)
+            {
+                case UserStatus.OnVerification:
+                    return "Не проверен";
+                case UserStatus.Blocked:
+                    return "Заблокирован";
+                case UserStatus.Deleted:
+                    return "Удален";
+                case UserStatus.Actual:
+                    return "Актуален";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        public static void RegistrationClient(ClientRegistrationInfo registrationInfo)
+        {
+            DBHelper.DbWorker.ExecuteIntoDBCommand(
+                $"INSERT INTO patient_personal_account " +
+                $"(login,password_,fullname,date_of_birth,home_address,phone_number,status) " +
+                $"VALUES (" +
+                $"{registrationInfo.Email}," +
+                $"\'{registrationInfo.PasswordHashCode}\'," +
+                $"{String.Join(" ", registrationInfo.FullName)}," +
+                $"\'{registrationInfo.BirthDay.ToShortDateString()}\'," +
+                $"{registrationInfo.Passport.Address}," +
+                $"{registrationInfo.Passport.PhoneNumber}," +
+                $"(SELECT ID FROM UserStatus WHERE status = " +
+                $"\'{ProfileHelper.GetClientStatus(UserStatus.OnVerification)}\'" +
+                $" LIMIT 1)" +
+                $");"
+                );
         }
     }
 }

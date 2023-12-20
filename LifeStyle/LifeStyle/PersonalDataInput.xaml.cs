@@ -1,4 +1,5 @@
 ﻿using LifeStyle.Extensions;
+using LifeStyle.ProjectFiles.Events;
 using LifeStyle.WindowSwitcher;
 using System;
 using System.Collections.Generic;
@@ -20,18 +21,29 @@ namespace LifeStyle
     /// <summary>
     /// Логика взаимодействия для PersonalDataInput.xaml
     /// </summary>
-    public partial class PersonalDataInput : Page
+    public partial class PersonalDataInput : Page, IRegistrationEvent
     {
-        public delegate void NotifyParent();
-        public event NotifyParent notify;
         public PersonalDataInput()
         {
             InitializeComponent();
         }
 
+        public event IRegistrationEvent.NotifyParent notify;
+
         private void FinishRegistration_Click(object sender, RoutedEventArgs e)
         {
-            notify.Invoke();
+            notify.Invoke(new ProjectFiles.ProjectEntities.ClientRegistrationInfo
+            {
+                 Passport = new ProjectFiles.ProjectEntities.Passport
+                 {
+                      Address = registration_address.Text,
+                      From = registration_passport_from.Text,
+                      PassportNumber = registration_passport_number.Text,
+                      PassportSeries = registration_passport_series.Text,
+                      PhoneNumber = user_phone_number.Text,
+                      SMPNumber = registration_smp_number.Text,
+                 }
+            });
         }
     }
 }

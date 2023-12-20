@@ -15,16 +15,21 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
         private string _Email;
         private DateTime _BirthDay;
         private IDictionary<string, VisitInformation> _VisitHistory;
+        private Passport _Passport;
+        private UserStatus _Status;
 
-        public Client(string[] fullName, DateTime birthday,string login) : base()
+        public Client(string[] fullName, DateTime birthday,string login, Passport passport) : base()
         {
             _FullName = fullName;
             _Email = login;
             _BirthDay = birthday;
             _VisitHistory = new Dictionary<string, VisitInformation>();
+            _Passport = passport;
         }
         public string FullName { get { return String.Join(" ", _FullName); } }
         public string Email { get { return _Email; } }   
+        public ReadOnlyPassport Passport { get { return new ReadOnlyPassport(_Passport); } }
+        public UserStatus Status { get { return _Status; } set { _Status = value; } }
 
         public void AddVisitInHistory(string visitName, VisitInformation visitInformation)
         {
@@ -36,7 +41,7 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
 
         public override object Clone()
         {
-            return new Client(_FullName.Clone() as string[], _BirthDay, _Email.Clone() as string)
+            return new Client(_FullName.Clone() as string[], _BirthDay, _Email.Clone() as string,_Passport)
             {
                 _VisitHistory = new Dictionary <string, VisitInformation>(_VisitHistory)
             };
