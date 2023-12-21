@@ -53,7 +53,7 @@ namespace LifeStyle.ProjectFiles.Extensions
             return true;
         }
 
-        public static Entitiy InitializeClient(DataTable entity)
+        public static Entitiy InitializeClient(DataTable entity,int rowLineNumber)
         {
             var parameters = new Dictionary<string, string>();
 
@@ -70,7 +70,7 @@ namespace LifeStyle.ProjectFiles.Extensions
                     case "passport_series":
                     case "number_passport":
                     case "passport_issued_by":
-                        parameters.Add(column.ColumnName, entity.Rows[0][column.Ordinal].ToString());
+                        parameters.Add(column.ColumnName, entity.Rows[rowLineNumber][column.Ordinal].ToString());
                         break;
                     default:
                         break;
@@ -91,7 +91,7 @@ namespace LifeStyle.ProjectFiles.Extensions
                 });
         }
 
-        public static Entitiy InitializeDoctor(DataTable entity)
+        public static Entitiy InitializeDoctor(DataTable entity, int rowLineNumber)
         {
             var parameters = new Dictionary<string, string>();
 
@@ -103,7 +103,7 @@ namespace LifeStyle.ProjectFiles.Extensions
                     case "login":
                     case "cabinet_number":
                     case "specialization":
-                        parameters.Add(column.ColumnName, entity.Rows[0][column.Ordinal].ToString());
+                        parameters.Add(column.ColumnName, entity.Rows[rowLineNumber][column.Ordinal].ToString());
                         break;
                     default:
                         break;
@@ -117,7 +117,7 @@ namespace LifeStyle.ProjectFiles.Extensions
                 parameters["login"]);
         }
 
-        public static Entitiy InitializeAdmin(DataTable entity)
+        public static Entitiy InitializeAdmin(DataTable entity, int rowLineNumber)
         {
             var parameters = new Dictionary<string, string>();
 
@@ -126,7 +126,7 @@ namespace LifeStyle.ProjectFiles.Extensions
                 switch (column.ColumnName)
                 {
                     case "login":
-                        parameters.Add(column.ColumnName, entity.Rows[0][column.Ordinal].ToString());
+                        parameters.Add(column.ColumnName, entity.Rows[rowLineNumber][column.Ordinal].ToString());
                         break;
                     default:
                         break;
@@ -163,12 +163,23 @@ namespace LifeStyle.ProjectFiles.Extensions
                 $"\'{registrationInfo.PasswordHashCode}\'," +
                 $"\'{String.Join(" ", registrationInfo.FullName)}\'," +
                 $"\'{registrationInfo.BirthDay.ToShortDateString()}\'," +
-                $"{registrationInfo.Passport.SMPNumber}" +
+                $"\'{registrationInfo.Passport.SMPNumber}\'," +
                 $"\'{registrationInfo.Passport.Address}\'," +
                 $"\'{registrationInfo.Passport.PhoneNumber}\'," +
                 $"(SELECT ID FROM UserStatus WHERE status = " +
                 $"\'{ProfileHelper.GetClientStatus(UserStatus.OnVerification)}\'" +
                 $" LIMIT 1)" +
+                $");"
+                );
+
+            DBHelper.DbWorker.ExecuteIntoDBCommand(
+                $"INSERT INTO Passport (id_passport,passport_series,number_passport,passport_issued_by) " +
+                $"VALUES (" +
+                $"(SELECT id_patient_personal_account FROM patient_personal_account " +
+                $"WHERE login = \'{registrationInfo.Email}\' LIMIT 1)," +
+                $"\'{registrationInfo.Passport.PassportSeries}\'," +
+                $"\'{registrationInfo.Passport.PassportNumber}\'," +
+                $"\'{registrationInfo.Passport.From}\'" +
                 $");"
                 );
         }

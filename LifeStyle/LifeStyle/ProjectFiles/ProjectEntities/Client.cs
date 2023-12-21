@@ -30,6 +30,7 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
         public string Email { get { return _Email; } }   
         public ReadOnlyPassport Passport { get { return new ReadOnlyPassport(_Passport); } }
         public UserStatus Status { get { return _Status; } set { _Status = value; } }
+        public DateTime BirthDay {  get { return _BirthDay; } }
 
         public void AddVisitInHistory(string visitName, VisitInformation visitInformation)
         {

@@ -15,12 +15,8 @@
     <Grid>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="56" Width="120">
-            <Label Content="user_name" VerticalContentAlignment="Center"/>
-            <Border x:Name="UserPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right">
-                <Border.Background>
-                    <ImageBrush Stretch="Fill" ImageSource="/ProjectFiles/icon/login_icon.png"/>
-                </Border.Background>
-            </Border>
+            <Label x:Name="UserName" Content="user_name" VerticalContentAlignment="Center"/>
+            <Border x:Name="UserPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right"/>
         </StackPanel>
 
         <TabControl x:Name="UserNavigationPanel" BorderThickness="0" Margin="0,0,0,38">
@@ -168,7 +164,7 @@
                             <SolidColorBrush Color="Black" Opacity="0.5"/>
                         </StackPanel.Background>
 
-                        <Image x:Name="CloseNotifications" Source="/ProjectFiles/icon/close_icon.png"  Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" MouseUp="CloseNotifications_MouseUp" Margin="10"/>
+                        <Image x:Name="CloseNotifications"  Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" MouseUp="CloseNotifications_MouseUp" Margin="10"/>
 
                         <Label Content="Уведомления" Foreground="#EFB2D1" FontSize="20" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
                         <StackPanel x:Name="NotificationsSavePlace" Orientation="Vertical" Height="302" Width="492">
@@ -182,7 +178,7 @@
                             <SolidColorBrush Color="Black" Opacity="0.5"/>
                         </StackPanel.Background>
 
-                        <Image x:Name="CloseDocuments" Source="/ProjectFiles/icon/close_icon.png" Width="30" Height="30" HorizontalAlignment="Right" Margin="10" MouseUp="CloseDocuments_MouseUp"/>
+                        <Image x:Name="CloseDocuments" Width="30" Height="30" HorizontalAlignment="Right" Margin="10" MouseUp="CloseDocuments_MouseUp"/>
                         <Label Content="Документы пациента" Foreground="#EFB2D1" FontSize="20" HorizontalAlignment="Center" Margin="0,20,0,0"/>
 
                         <StackPanel Orientation="Vertical" Height="222" Width="504">

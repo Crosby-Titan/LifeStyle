@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using LifeStyle.Extensions;
@@ -16,6 +17,7 @@ namespace LifeStyle.Paths
         public static string? Icon { get; private set; }
         public static string? DataBase { get; private set; }
         public static string? Temp { get; private set; }
+        public static string? XAML { get; private set; }
 
         static PathWorker() { InitializePaths(); }
 
@@ -31,6 +33,7 @@ namespace LifeStyle.Paths
             Icon = Path.Combine(ApplicationPath, "ProjectFiles\\icon");
             DataBase = Path.Combine(ApplicationPath, "DataBase");
             Temp = Path.Combine(ApplicationPath, "ProjectFiles\\Temp");
+            XAML = Path.Combine(ApplicationPath, "XAML");
         }
     }
 }

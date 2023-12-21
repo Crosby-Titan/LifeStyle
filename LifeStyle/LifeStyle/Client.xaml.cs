@@ -15,6 +15,8 @@ using LifeStyle.Extensions;
 using LifeStyle.WindowSwitcher;
 using LifeStyle.DataBase;
 using LifeStyle.ProjectFiles.ProjectEntities;
+using LifeStyle.Paths;
+using LifeStyle.ProjectFiles.Extensions;
 
 namespace LifeStyle
 {
@@ -24,10 +26,24 @@ namespace LifeStyle
     public partial class Client : Window
     {
         private ProjectFiles.ProjectEntities.Client _Client;
+        private IDictionary<string, ProjectFiles.ProjectEntities.Doctor> _Doctors;
+        private IDictionary<string, ProjectFiles.ProjectEntities.ServiceInformation> _Services;
         public Client()
         {
             InitializeComponent();
             InitializeWindowComponent();
+            this.Loaded += Client_Loaded;
+        }
+
+        private void Client_Loaded(object sender, RoutedEventArgs e)
+        {
+            UserProfileImage.Source = new BitmapImage(new Uri(System.IO.Path.Combine(PathWorker.Icon, "default_user_profile_image.jpg")));
+            UserPhoto.Background = new ImageBrush(UserProfileImage.Source.Clone());
+            NotificationsIcon.Source = new BitmapImage(new Uri(System.IO.Path.Combine(PathWorker.Icon, "notification_icon.png")));
+            CloseNotifications.Source = new BitmapImage(new Uri(System.IO.Path.Combine(PathWorker.Icon, "close_icon.png")));
+            CloseDocuments.Source = CloseNotifications.Source.Clone();
+            LoadDoctors();
+            LoadServices();
         }
 
         public Client(Entitiy client): this()
@@ -53,6 +69,41 @@ namespace LifeStyle
                     break;
                 }
             }
+        }
+
+        private void LoadDoctors()
+        {
+            var doctors = DBHelper.DbWorker.ExecuteFromDBCommand(
+                $"SELECT * FROM Doctor;"
+                );
+
+            _Doctors = new Dictionary<string, ProjectFiles.ProjectEntities.Doctor>();
+
+            for (int i = 0; i < doctors.Rows.Count; i++)
+            {
+                var doctor = (ProfileHelper.InitializeDoctor(doctors, i) as ProjectFiles.ProjectEntities.Doctor);
+
+                _Doctors.Add(doctor.Email, doctor);
+
+                DoctorListPlace.Children.Add(WindowHelper.CreateDoctorCard(doctor));
+            }
+
+        }
+
+        private void LoadServices()
+        {
+            //var services = DBHelper.DbWorker.ExecuteFromDBCommand(
+            //    $"SELECT * FROM services"
+            //    );
+
+            //_Services = new Dictionary<string, ProjectFiles.ProjectEntities.ServiceInformation>();
+
+            //for (int i = 0; i < services.Rows.Count; i++)
+            //{
+            //   // var service = 
+
+            //    //ServiceListPlace.Children.Add(WindowHelper.CreateServiceCard());
+            //}
         }
 
         private void InitializeWindowComponent()
@@ -157,6 +208,7 @@ namespace LifeStyle
             if(result)
             {
                 UserProfileImage.Source = new BitmapImage(new Uri(fileDialog.FileName));
+                UserPhoto.Background = new ImageBrush(UserProfileImage.Source);
             }
 
         }

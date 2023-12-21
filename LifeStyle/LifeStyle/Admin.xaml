@@ -16,11 +16,7 @@
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="56" Width="100" Margin="0,0,10,0">
             <Label Content="Admin" VerticalContentAlignment="Center"/>
-            <Border x:Name="AdminPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right">
-                <Border.Background>
-                    <ImageBrush Stretch="Fill" ImageSource="C:\Users\Student\Source\Repos\LifeStyle\LifeStyle\LifeStyle\ProjectFiles\icon\login_icon.png"/>
-                </Border.Background>
-            </Border>
+            <Border x:Name="AdminPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right"/>
         </StackPanel>
 
         <Button x:Name="Exit" Content="Выход" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Background="#EFB2D1" BorderThickness="0" Height="26" Width="69" Click="Exit_Click" Margin="0,0,10,7" >
@@ -211,7 +207,7 @@
                             </StackPanel>
 
                         </StackPanel>
-                        <ComboBox x:Name="DoctorList" Width="200" Margin="20"/>
+                        <ComboBox x:Name="DoctorList" Width="350" Margin="20"/>
                         <Button x:Name="EditDoctors" Content="Редактировать" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="314" Click="EditDoctors_Click" Margin="10" >
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -316,7 +312,7 @@
                                 </Button.Resources>
                             </Button>
                         </StackPanel>
-                        <ComboBox x:Name="PatientList" Width="200" Margin="20"/>
+                        <ComboBox x:Name="PatientList" Width="350" Margin="20"/>
                         <Button x:Name="EditUsers" Content="Редактировать" FontSize="20"  Background="#EFB2D1" BorderThickness="0" Height="38" Width="314" Click="EditUsers_Click" Margin="10" >
                             <Button.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -352,9 +348,6 @@
             </TabItem>
             <TabItem Header="Список">
                 <Grid>
-                    <Grid.Background>
-                        <ImageBrush ImageSource="{Binding}"/>
-                    </Grid.Background>
                     <StackPanel Width="568" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Vertical" Height="766">
                         <StackPanel.Background>
                             <SolidColorBrush Color="Black" Opacity="0.6"/>

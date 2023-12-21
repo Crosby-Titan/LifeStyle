@@ -8,7 +8,7 @@
                 </StackPanel.Background>
                 <Border CornerRadius="50" Width="130" Height="130" VerticalAlignment="Center">
                     <Border.Background>
-                        <ImageBrush ImageSource="D:\УП\LifeStyle\LifeStyle\ProjectFiles\icon\default_user_profile_image.jpg" Stretch="Fill" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <ImageBrush Stretch="Fill" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Border.Background>
                 </Border>
             </StackPanel>
@@ -20,10 +20,7 @@
                         <SolidColorBrush Color="White" Opacity="0.5"/>
                     </StackPanel.Background>
 
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Должность,Стаж,График" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    </StackPanel>
-
+                    <Label Content="Должность,Стаж,График" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2"/>
                 </StackPanel>
 
             </StackPanel>

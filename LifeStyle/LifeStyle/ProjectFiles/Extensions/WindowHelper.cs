@@ -44,7 +44,7 @@ namespace LifeStyle.Extensions
         {
             XamlReader reader = new XamlReader();
 
-            var xaml = reader.LoadAsync(new System.IO.FileStream(@"D:\УП\LifeStyle\LifeStyle\XAML\DoctorCard.xaml", System.IO.FileMode.Open)) as ResourceDictionary;
+            var xaml = reader.LoadAsync(new FileStream(@"D:\УП\LifeStyle\LifeStyle\XAML\DoctorCard.xaml", System.IO.FileMode.Open)) as ResourceDictionary;
 
             return xaml["DoctorCardTemplate"] as Border;
         }
@@ -53,7 +53,7 @@ namespace LifeStyle.Extensions
         {
             XamlReader reader = new XamlReader();
 
-            var xaml = reader.LoadAsync(new System.IO.FileStream(@"D:\УП\LifeStyle\LifeStyle\XAML\ServiceCard.xaml", System.IO.FileMode.Open)) as ResourceDictionary;
+            var xaml = reader.LoadAsync(new FileStream(Path.Combine(PathWorker.XAML, "ServiceCard.xaml"), System.IO.FileMode.Open)) as ResourceDictionary;
 
             return xaml["ServiceCardTemplate"] as Border;
         }
@@ -62,7 +62,7 @@ namespace LifeStyle.Extensions
         {
             XamlReader reader = new XamlReader();
 
-            var xaml = reader.LoadAsync(new System.IO.FileStream(@"D:\УП\LifeStyle\LifeStyle\XAML\VisitCard.xaml", System.IO.FileMode.Open)) as ResourceDictionary;
+            var xaml = reader.LoadAsync(new FileStream(Path.Combine(PathWorker.XAML,"VisitCard.xaml"), System.IO.FileMode.Open)) as ResourceDictionary;
 
             return xaml["VisitCardTemplate"] as Border;
         }
@@ -71,7 +71,7 @@ namespace LifeStyle.Extensions
         {
             XamlReader reader = new XamlReader();
 
-            var xaml = reader.LoadAsync(new System.IO.FileStream(@"D:\УП\LifeStyle\LifeStyle\XAML\VisitCard.xaml", System.IO.FileMode.Open)) as ResourceDictionary;
+            var xaml = reader.LoadAsync(new FileStream(@"D:\УП\LifeStyle\LifeStyle\XAML\VisitCard.xaml", System.IO.FileMode.Open)) as ResourceDictionary;
 
             var visitCard = xaml["VisitCardTemplate"] as Border;
 
@@ -116,7 +116,7 @@ namespace LifeStyle.Extensions
         {
             XamlReader reader = new XamlReader();
 
-            var xaml = reader.LoadAsync(new System.IO.FileStream(@"D:\УП\LifeStyle\LifeStyle\XAML\ServiceCard.xaml", System.IO.FileMode.Open)) as ResourceDictionary;
+            var xaml = reader.LoadAsync(new FileStream(Path.Combine(PathWorker.XAML, "ServiceCard.xaml"),FileMode.Open)) as ResourceDictionary;
 
             var serviceCard = xaml["ServiceCardTemplate"] as Border;
 
@@ -160,7 +160,7 @@ namespace LifeStyle.Extensions
         {
             XamlReader reader = new XamlReader();
 
-            var xaml = reader.LoadAsync(new System.IO.FileStream(@"D:\УП\LifeStyle\LifeStyle\XAML\DoctorCard.xaml", System.IO.FileMode.Open)) as ResourceDictionary;
+            var xaml = reader.LoadAsync(new FileStream(Path.Combine(PathWorker.XAML,"DoctorCard.xaml"),FileMode.Open)) as ResourceDictionary;
 
             var doctorCard = xaml["DoctorCardTemplate"] as Border;
 
@@ -179,9 +179,19 @@ namespace LifeStyle.Extensions
                                     {
                                         lbl.Content = $"{doctor.FullName}";
                                     }
-                                    if((lbl.Content as string).Contains("Должность", StringComparison.CurrentCultureIgnoreCase))
+                                    break;
+                                case StackPanel p:
+                                    foreach(UIElement e in p.Children)
                                     {
-                                        lbl.Content = $"\t{doctor.Specialization}\n\t{doctor.Experience}\n\tГрафик: {doctor.ShortWorkSchedule}";
+                                        switch(e)
+                                        {
+                                            case Label s:
+                                                if ((s.Content as string).Contains("Должность", StringComparison.CurrentCultureIgnoreCase))
+                                                {
+                                                    s.Content = $"\t{doctor.Specialization}\n\t{doctor.Experience} лет\n\tГрафик: {doctor.ShortWorkSchedule}";
+                                                }
+                                                break;
+                                        }
                                     }
                                     break;
                             }
@@ -205,9 +215,12 @@ namespace LifeStyle.Extensions
         public static List<object[]> LoadRegistrationRequests()
         {
             var requests = DBHelper.DbWorker.ExecuteFromDBCommand(
-                $"SELECT id_patient_personal_account,login,UserStatus.status FROM " +
-                $"patient_personal_account,UserStatus " +
-                $"WHERE patient_personal_account.status = (SELECT ID FROM UserStatus WHERE UserStatus.status = \'{ProfileHelper.GetClientStatus(UserStatus.OnVerification)}\' LIMIT 1);"
+                $"SELECT id_patient_personal_account,login,UserStatus.status " +
+                $"FROM patient_personal_account " +
+                $"INNER JOIN UserStatus " +
+                $"ON patient_personal_account.status = UserStatus.ID " +
+                $"WHERE " +
+                $"UserStatus.status = \'{ProfileHelper.GetClientStatus(UserStatus.OnVerification)}\';"
                 );
 
             var dataList = new List<object[]>();    
