@@ -220,7 +220,7 @@ namespace LifeStyle.Extensions
             return dataList;
         }
 
-        public static UIElement CreateRegistrationRequests(object[] data)
+        public static UIElement CreateRegistrationRequest(object[] data)
         {
 
             var registrationRequest = new StackPanel
@@ -252,16 +252,18 @@ namespace LifeStyle.Extensions
 
             registrationRequest.MouseUp += (o, e) =>
             {
-                registrationRequest.Background = new SolidColorBrush 
-                { 
-                    Color = (Color)ColorConverter.ConvertFromString("#EFB2D1"),
-                    Opacity = 0.5 
-                };
-            };
-
-            registrationRequest.MouseDown += (o, e) =>
-            {
-                registrationRequest.Background = new SolidColorBrush(Colors.Transparent);
+                if(!(registrationRequest.Background is SolidColorBrush brush && brush.Color == (Color)ColorConverter.ConvertFromString("#EFB2D1")))
+                {
+                    registrationRequest.Background = new SolidColorBrush
+                    {
+                        Color = (Color)ColorConverter.ConvertFromString("#EFB2D1"),
+                        Opacity = 0.5
+                    };
+                }
+                else
+                {
+                    registrationRequest.Background = new SolidColorBrush(Colors.Transparent);
+                }
             };
 
             return registrationRequest;
@@ -272,7 +274,7 @@ namespace LifeStyle.Extensions
 
             foreach(var item in data)
             {
-                uiList.Add(CreateRegistrationRequests(item));
+                uiList.Add(CreateRegistrationRequest(item));
             }
 
             return uiList;

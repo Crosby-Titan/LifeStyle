@@ -18,22 +18,21 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
             _VerifiedAdmin = admin;
         }
 
-        public void ChangeClientStatus(Entitiy client,UserStatus status)
+        public void ChangeClientStatus(string email,UserStatus status)
         {
-            if (client is null)
+            if (string.IsNullOrEmpty(email))
                 return;
 
-            (client as Client).Status = status;
-
-            ChangeClientStatus(client);
+            ChangeClientStatus(status, email);
         }
 
-        private void ChangeClientStatus(Entitiy client)
+        private void ChangeClientStatus(UserStatus status,string email)
         {
             DBHelper.DbWorker.ExecuteIntoDBCommand(
-                $"UPDATE patient_personal_account SET" +
-                $"status = {ProfileHelper.GetClientStatus((client as Client).Status)} " +
-                $"WHERE login = {(client as Client).Email};"
+                $"UPDATE patient_personal_account SET " +
+                $"status = " +
+                $"(SELECT ID FROM UserStatus WHERE status = \'{ProfileHelper.GetClientStatus(status)}\' LIMIT 1) " +
+                $"WHERE login = \'{email}\';"
                 );
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace LifeStyle
         public Admin()
         {
             InitializeComponent();
-            _Requests = WindowHelper.LoadRegistrationRequests();
+            InitializeUIElements();
         }
 
         public Admin(Entitiy admin): this()
@@ -38,14 +39,76 @@ namespace LifeStyle
             _AdminPanel = new AdminPanel(_Admin);
         }
 
+        private void InitializeUIElements()
+        {
+            LoadRequests();
+            LoadECPdata();
+        }
+
+        private void LoadECPdata()
+        {
+            var ecpData = DBHelper.DbWorker.ExecuteFromDBCommand($"SELECT * FROM ecp;");
+
+            foreach(DataRow dataRow in ecpData.Rows)
+            {
+                ReadOnlyECPList.Items.Add(dataRow.ItemArray);
+            }
+        }
+
+        private void LoadRequests()
+        {
+            _Requests = WindowHelper.LoadRegistrationRequests();
+            foreach (var item in _Requests)
+            {
+                UsersRegistrationRequestList.Children.Add(WindowHelper.CreateRegistrationRequest(item));
+            }
+        }
+
         private void Allow_Click(object sender, RoutedEventArgs e)
         {
+            var selectedRequests = SearchSelectedRequests(UsersRegistrationRequestList);
 
+            foreach(UIElement allowedUser in selectedRequests)
+            {
+                SetStatus(((allowedUser as StackPanel).Children[1] as Label).Content.ToString(), UserStatus.Actual);
+                UsersRegistrationRequestList.Children.Remove(allowedUser);
+            }
+        }
+
+        private List<UIElement> SearchSelectedRequests(UIElement element)
+        {
+            var panel = element as StackPanel;
+            var searchedElements = new List<UIElement>();
+
+            foreach(var uiElement in panel.Children)
+            {
+                switch (uiElement)
+                {
+                    case StackPanel childPanel:
+                        if (childPanel.Background is SolidColorBrush brush && brush.Color == (Color)ColorConverter.ConvertFromString("#EFB2D1"))
+                            searchedElements.Add(childPanel);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return searchedElements;
+        }
+        private void SetStatus(string email,UserStatus status)
+        {
+            _AdminPanel.ChangeClientStatus(email, status);
         }
 
         private void Deny_Click(object sender, RoutedEventArgs e)
         {
+            var selectedRequests = SearchSelectedRequests(UsersRegistrationRequestList);
 
+            foreach (UIElement allowedUser in selectedRequests)
+            {
+                SetStatus(((allowedUser as StackPanel).Children[1] as Label).Content.ToString(), UserStatus.Deleted);
+                UsersRegistrationRequestList.Children.Remove(allowedUser);
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

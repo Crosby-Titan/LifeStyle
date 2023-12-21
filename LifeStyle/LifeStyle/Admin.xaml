@@ -18,7 +18,7 @@
             <Label Content="Admin" VerticalContentAlignment="Center"/>
             <Border x:Name="AdminPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right">
                 <Border.Background>
-                    <ImageBrush Stretch="Fill" ImageSource="\ProjectFiles\icon\login_icon.png"/>
+                    <ImageBrush Stretch="Fill" ImageSource="C:\Users\Student\Source\Repos\LifeStyle\LifeStyle\LifeStyle\ProjectFiles\icon\login_icon.png"/>
                 </Border.Background>
             </Border>
         </StackPanel>
@@ -339,13 +339,12 @@
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="№"  Width="80" />
                                     <DataGridTextColumn Header="ФИО пациента" Width="300" />
-                                    <DataGridHyperlinkColumn Header="Дата" Width="300" />
-                                    <DataGridTextColumn Header="Анализ"  Width="300" />
-                                    <DataGridTextColumn Header="Врач"  Width="300" />
-                                    <DataGridHyperlinkColumn Header="Результат" Width="200" />
+                                    <DataGridTextColumn Header="Доктор" Width="300" />
+                                    <DataGridTextColumn Header="Дата"  Width="300" />
+                                    <DataGridTextColumn Header="Анализы"  Width="300" />
+                                    <DataGridTextColumn Header="Результат" Width="200" />
                                 </DataGrid.Columns>
                             </DataGrid>
-
                         </StackPanel>
                     </ScrollViewer>
 
