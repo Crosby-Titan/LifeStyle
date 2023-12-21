@@ -54,6 +54,18 @@ namespace LifeStyle
                 ReadOnlyECPList.Items.Add(dataRow.ItemArray);
             }
         }
+        
+        public void LoadAllDoctors()
+        {
+            var doctors = DBHelper.DbWorker.ExecuteFromDBCommand(
+                $"SELECT * FROM Doctor;"
+                );
+
+            foreach(var doc in doctors.Rows)
+            {
+                DoctorList.Items.Add(ProfileHelper.InitializeClient(doc));
+            }
+        }
 
         private void LoadRequests()
         {

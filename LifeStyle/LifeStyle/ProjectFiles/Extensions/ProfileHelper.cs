@@ -157,12 +157,13 @@ namespace LifeStyle.ProjectFiles.Extensions
         {
             DBHelper.DbWorker.ExecuteIntoDBCommand(
                 $"INSERT INTO patient_personal_account " +
-                $"(login,password_,fullname,date_of_birth,home_address,phone_number,status) " +
+                $"(login,password_,fullname,date_of_birth,smpnumber,home_address,phone_number,status) " +
                 $"VALUES (" +
                 $"\'{registrationInfo.Email}\'," +
                 $"\'{registrationInfo.PasswordHashCode}\'," +
                 $"\'{String.Join(" ", registrationInfo.FullName)}\'," +
                 $"\'{registrationInfo.BirthDay.ToShortDateString()}\'," +
+                $"{registrationInfo.Passport.SMPNumber}" +
                 $"\'{registrationInfo.Passport.Address}\'," +
                 $"\'{registrationInfo.Passport.PhoneNumber}\'," +
                 $"(SELECT ID FROM UserStatus WHERE status = " +

@@ -47,7 +47,7 @@ namespace LifeStyle
             {
                 case "Пациент":
 
-                    var data1 = DBHelper.DbWorker.ExecuteFromDBCommand("SELECT fullname, login, date_of_birth FROM patient_personal_account");
+                    var data1 = DBHelper.DbWorker.ExecuteFromDBCommand("SELECT * FROM patient_personal_account");
 
                      Switcher.SwitchWindow(this, new Client(ProfileHelper.InitializeClient(data1)));
 

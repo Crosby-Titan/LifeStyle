@@ -207,7 +207,7 @@ namespace LifeStyle.Extensions
             var requests = DBHelper.DbWorker.ExecuteFromDBCommand(
                 $"SELECT id_patient_personal_account,login,UserStatus.status FROM " +
                 $"patient_personal_account,UserStatus " +
-                $"WHERE UserStatus.status = \'{ProfileHelper.GetClientStatus(UserStatus.OnVerification)}\';"
+                $"WHERE patient_personal_account.status = (SELECT ID FROM UserStatus WHERE UserStatus.status = \'{ProfileHelper.GetClientStatus(UserStatus.OnVerification)}\' LIMIT 1);"
                 );
 
             var dataList = new List<object[]>();    
