@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
+using LifeStyle.Extensions;
 
 namespace LifeStyle.DataBase
 {
@@ -47,7 +48,10 @@ namespace LifeStyle.DataBase
         private static void ConnectWithDB(string password)
         {
             if (!DbWorker.Connect(password))
+            {
+                WindowHelper.ShowErrorMessageBox($"DataBase connection is {DbWorker.ConnectionStatus}");
                 Environment.Exit(-1);
+            }
             
         }
 

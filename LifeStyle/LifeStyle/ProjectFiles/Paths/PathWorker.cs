@@ -15,6 +15,7 @@ namespace LifeStyle.Paths
         public static string? Background { get; private set; }
         public static string? Icon { get; private set; }
         public static string? DataBase { get; private set; }
+        public static string? Temp { get; private set; }
 
         static PathWorker() { InitializePaths(); }
 
@@ -29,6 +30,7 @@ namespace LifeStyle.Paths
             Background = Path.Combine(ApplicationPath, "ProjectFiles\\background");
             Icon = Path.Combine(ApplicationPath, "ProjectFiles\\icon");
             DataBase = Path.Combine(ApplicationPath, "DataBase");
+            Temp = Path.Combine(ApplicationPath, "ProjectFiles\\Temp");
         }
     }
 }

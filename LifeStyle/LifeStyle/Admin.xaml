@@ -73,7 +73,7 @@
                             <SolidColorBrush Color="Black" Opacity="0.6"/>
                         </StackPanel.Background>
                         <Label Content="Запрос на подтверждение" Foreground="#EFB2D1" HorizontalContentAlignment="Center" FontSize="20" Margin="30"/>
-                        <StackPanel Orientation="Vertical" Height="500" Width="530">
+                        <StackPanel x:Name="UsersRegistrationRequestList" Orientation="Vertical" Height="500" Width="530">
                             <StackPanel.Background>
                                 <SolidColorBrush Color="White" Opacity="0.3"/>
                             </StackPanel.Background>

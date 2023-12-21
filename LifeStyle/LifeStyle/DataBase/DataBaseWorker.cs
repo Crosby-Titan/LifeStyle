@@ -29,6 +29,7 @@ namespace LifeStyle.DataBase
         }
 
         public string LastQueryText { get { return _command.CommandText; } }
+        public ConnectionStatus ConnectionStatus { get { return _ConnectionStatus; } }
 
         public DataTable ExecuteFromDBCommand(string commands)
         {

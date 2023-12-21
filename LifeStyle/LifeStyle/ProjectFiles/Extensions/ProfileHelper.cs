@@ -159,15 +159,30 @@ namespace LifeStyle.ProjectFiles.Extensions
                 $"INSERT INTO patient_personal_account " +
                 $"(login,password_,fullname,date_of_birth,home_address,phone_number,status) " +
                 $"VALUES (" +
-                $"{registrationInfo.Email}," +
+                $"\'{registrationInfo.Email}\'," +
                 $"\'{registrationInfo.PasswordHashCode}\'," +
-                $"{String.Join(" ", registrationInfo.FullName)}," +
+                $"\'{String.Join(" ", registrationInfo.FullName)}\'," +
                 $"\'{registrationInfo.BirthDay.ToShortDateString()}\'," +
-                $"{registrationInfo.Passport.Address}," +
-                $"{registrationInfo.Passport.PhoneNumber}," +
+                $"\'{registrationInfo.Passport.Address}\'," +
+                $"\'{registrationInfo.Passport.PhoneNumber}\'," +
                 $"(SELECT ID FROM UserStatus WHERE status = " +
                 $"\'{ProfileHelper.GetClientStatus(UserStatus.OnVerification)}\'" +
                 $" LIMIT 1)" +
+                $");"
+                );
+        }
+
+        public static void RegistrationDoctor(DoctorRegistrationInfo registrationInfo)
+        {
+            DBHelper.DbWorker.ExecuteIntoDBCommand(
+                $"INSERT INTO Doctor " +
+                $"(login,password_,fullname,specialization,cabinet_number) " +
+                $"VALUES " +
+                $"(\'{registrationInfo.Email}\'," +
+                $"\'{registrationInfo.Password}\'," +
+                $"\'{String.Join(" ",registrationInfo.FullName)}\'," +
+                $"\'{registrationInfo.Specialization}\'," +
+                $"\'{registrationInfo.CabinetNumber}\'" +
                 $");"
                 );
         }

@@ -10,6 +10,10 @@
     <PackageReference Include="Npgsql" Version="7.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ProjectFiles\Temp\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties database_4data_3base_3parameters_1json__JsonSchema="https://appsemble.app/api.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

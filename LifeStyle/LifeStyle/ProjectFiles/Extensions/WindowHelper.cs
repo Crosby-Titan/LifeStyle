@@ -11,6 +11,9 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using LifeStyle.ProjectFiles.ProjectEntities;
 using System.IO;
+using LifeStyle.DataBase;
+using LifeStyle.ProjectFiles.Extensions;
+using System.Data;
 
 namespace LifeStyle.Extensions
 {
@@ -197,6 +200,82 @@ namespace LifeStyle.Extensions
             }
 
             return doctorCard;
+        }
+
+        public static List<object[]> LoadRegistrationRequests()
+        {
+            var requests = DBHelper.DbWorker.ExecuteFromDBCommand(
+                $"SELECT id_patient_personal_account,login,UserStatus.status FROM " +
+                $"patient_personal_account,UserStatus " +
+                $"WHERE UserStatus.status = \'{ProfileHelper.GetClientStatus(UserStatus.OnVerification)}\';"
+                );
+
+            var dataList = new List<object[]>();    
+
+            foreach (DataRow request in requests.Rows)
+            {
+                dataList.Add(request.ItemArray);
+            }
+
+            return dataList;
+        }
+
+        public static UIElement CreateRegistrationRequests(object[] data)
+        {
+
+            var registrationRequest = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Children =
+                {
+                    new Label
+                    {
+                        Content = data[0],
+                        FontSize = 15d,
+                        Foreground = new SolidColorBrush(Colors.White)
+                    },
+                    new Label
+                    {
+                        Content = data[1],
+                        FontSize = 15d,
+                        Foreground = new SolidColorBrush(Colors.White)
+                    },
+                    new Label
+                    {
+                        Content = data[2],
+                        FontSize = 15d,
+                        Foreground = new SolidColorBrush(Colors.White)
+                    }
+                },
+
+            };
+
+            registrationRequest.MouseUp += (o, e) =>
+            {
+                registrationRequest.Background = new SolidColorBrush 
+                { 
+                    Color = (Color)ColorConverter.ConvertFromString("#EFB2D1"),
+                    Opacity = 0.5 
+                };
+            };
+
+            registrationRequest.MouseDown += (o, e) =>
+            {
+                registrationRequest.Background = new SolidColorBrush(Colors.Transparent);
+            };
+
+            return registrationRequest;
+        }
+        public static List<UIElement> CreateRegistrationRequests(List<object[]> data)
+        {
+            var uiList = new List<UIElement>();
+
+            foreach(var item in data)
+            {
+                uiList.Add(CreateRegistrationRequests(item));
+            }
+
+            return uiList;
         }
     }
 }
