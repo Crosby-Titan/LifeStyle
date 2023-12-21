@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LifeStyle.DataBase;
+using LifeStyle.Extensions;
 using LifeStyle.ProjectFiles.Extensions;
 using LifeStyle.ProjectFiles.ProjectEntities;
 
@@ -24,9 +25,11 @@ namespace LifeStyle
     {
         private ProjectFiles.ProjectEntities.Admin _Admin;
         private AdminPanel _AdminPanel;
+        private List<object[]> _Requests;
         public Admin()
         {
             InitializeComponent();
+            _Requests = WindowHelper.LoadRegistrationRequests();
         }
 
         public Admin(Entitiy admin): this()
