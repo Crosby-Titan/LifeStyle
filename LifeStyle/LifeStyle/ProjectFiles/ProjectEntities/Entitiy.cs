@@ -23,7 +23,7 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
 
         public override string ToString()
         {
-            return $"ID entity: {ID}\nIs Entity super user: {IsSuperUser}";
+            return $"ID entity: {ID}\n Is Entity super user: {IsSuperUser}";
         }
 
         public virtual object Clone()

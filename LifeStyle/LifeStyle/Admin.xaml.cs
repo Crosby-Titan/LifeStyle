@@ -83,7 +83,10 @@ namespace LifeStyle
         public void LoadAllClients()
         {
             var clients = DBHelper.DbWorker.ExecuteFromDBCommand(
-                $"SELECT * FROM patient_personal_account,Passport;"
+                "SELECT fullname,login,date_of_birth,smpnumber,home_address,phone_number,passport_series,number_passport,passport_issued_by " +
+                "FROM patient_personal_account " +
+                "INNER JOIN Passport " +
+                "ON Passport.id_passport = patient_personal_account.id_patient_personal_account;"
                 );
 
             _Clients = new Dictionary<string, ProjectFiles.ProjectEntities.Client>();
