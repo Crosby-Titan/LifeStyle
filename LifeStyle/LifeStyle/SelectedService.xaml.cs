@@ -22,19 +22,32 @@ namespace LifeStyle
     {
         public delegate void NotifyParent(VisitInformation visit);
         public event NotifyParent notify;
+        private ProjectFiles.ProjectEntities.Client _Client;
+        private ServiceInformation _Service;
+        private string _DoctorName;
         public SelectedService()
         {
             InitializeComponent();
         }
 
-        public SelectedService(string caption) : base()
+        public SelectedService(string doctorName, ProjectFiles.ProjectEntities.Client client, ServiceInformation service) : this()
         {
-            this.Title = caption;
+            this.Title = service.ServiceName;
+            _Client = client;
+            _Service = service;
+            _DoctorName = doctorName;
         }
 
         private void SaveVisit_Click(object sender, RoutedEventArgs e)
         {
-            notify.Invoke(new VisitInformation { });
+            notify.Invoke(new VisitInformation
+            {
+                dateOfVisit = new DateTime(VisitDate.SelectedDate.Value.Ticks),
+                Description = UserMessage.Text,
+                ServiceName = _Service.ServiceName,
+                fullNameDoctor = _DoctorName,
+                fullNamePatient = _Client.FullName
+            }); ;
         }
     }
 }

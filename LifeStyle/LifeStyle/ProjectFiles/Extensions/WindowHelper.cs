@@ -112,7 +112,7 @@ namespace LifeStyle.Extensions
             return visitCard;
         }
 
-        public static UIElement CreateServiceCard(ServiceInformation service)
+        public static UIElement CreateServiceCard(ProjectFiles.ProjectEntities.Client client,ServiceInformation service)
         {
             XamlReader reader = new XamlReader();
 
@@ -120,19 +120,12 @@ namespace LifeStyle.Extensions
 
             var serviceCard = xaml["ServiceCardTemplate"] as Border;
 
+            string selectedDoctor = "";
+
             foreach(UIElement element in (serviceCard.Child as StackPanel).Children)
             {
                 switch (element)
                 {
-                    case Label lbl:
-                        lbl.Content = $"\t\t{service.ServiceName}\n\n\t{service.Description}";
-                        break;
-                    case Button btn:
-                        btn.Click += (object sender, RoutedEventArgs e) =>
-                        {
-                            new SelectedService(service.ServiceName);
-                        };
-                        break;
                     case StackPanel panel:
                         
                         foreach(UIElement innerElement in panel.Children)
@@ -143,10 +136,62 @@ namespace LifeStyle.Extensions
                                     new BitmapImage(
                                         new Uri(
                                             Path.Combine(PathWorker.Icon, "default_user_profile_image.jpg"))));
-                                break;
+                            }
+                            if(innerElement is ComboBox box)
+                            {
+                                var doctorsOnService = DBHelper.DbWorker.ExecuteFromDBCommand(
+                                    $"SELECT fullname " +
+                                    $"FROM Doctor " +
+                                    $"WHERE Doctor.specialization = \'{service.Specialization}\';"
+                                    );
+
+                                for(int i = 0;i < doctorsOnService.Rows.Count;i++)
+                                {
+                                    box.Items.Add(doctorsOnService.Rows[i][0]);
+                                }
+
+                                box.SelectionChanged += (o, e) =>
+                                {
+                                    selectedDoctor = box.SelectedItem.ToString();
+                                };
                             }
                         }
 
+                        break;
+                    case Label lbl:
+                        lbl.Content = $"\t\t{service.ServiceName}\n\n\t{service.Description}";
+                        break;
+                    case Button btn:
+                        btn.Click += (object sender, RoutedEventArgs e) =>
+                        {
+                            var selectedService = new SelectedService(selectedDoctor, client, service);
+
+                            selectedService.notify += (info) =>
+                            {
+                                if(string.IsNullOrWhiteSpace(selectedDoctor))
+                                {
+                                    WindowHelper.ShowErrorMessageBox("Не выбран врач!");
+                                    return;
+                                }
+
+                                DBHelper.DbWorker.ExecuteIntoDBCommand(
+                                    $"INSERT INTO Reseption " +
+                                    $"(fullname_patient,fullname_doctor,specialization_doctor,cabinet_number,date_and_time,Service,Patient_phone_number,SMPNumber) " +
+                                    $"VALUES (" +
+                                    $"\'{client.FullName}\'," +
+                                    $"\'{selectedDoctor}\'," +
+                                    $"(SELECT id_special FROM Spec WHERE spec = \'{service.Specialization}\' LIMIT 1)," +
+                                    $"(SELECT cabinet_number FROM Doctor WHERE fullname = \'{selectedDoctor}\' LIMIT 1)," +
+                                    $"\'{info.dateOfVisit}\'," +
+                                    $"(SELECT id_services FROM Services WHERE service_list = \'{service.ServiceName}\' LIMIT 1)," +
+                                    $"{client.Passport.PhoneNumber}," +
+                                    $"{client.Passport.SMPNumber}" +
+                                    $");"
+                                    );
+
+                            };
+
+                        };
                         break;
                     default:
                         break;
@@ -291,6 +336,36 @@ namespace LifeStyle.Extensions
             }
 
             return uiList;
+        }
+
+        public static ServiceInformation LoadServices(DataTable services,int rowsLineNumber)
+        {
+
+            var serviceList = new Dictionary<string, string>();
+
+            foreach(DataColumn column in services.Columns)
+            {
+                switch (column.ColumnName)
+                {
+                    case "specialization":
+                    case "service_list":
+                    case "price":
+                        serviceList.Add(column.ColumnName, services.Rows[rowsLineNumber][column.Ordinal].ToString());
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+
+            return new ServiceInformation
+            {
+                Description = "",
+                ServiceName = serviceList["service_list"],
+                ServicePrice = decimal.Parse(serviceList["price"]),
+                Specialization = serviceList["specialization"]
+            };
         }
     }
 }

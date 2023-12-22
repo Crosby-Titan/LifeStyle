@@ -27,7 +27,7 @@ namespace LifeStyle
     {
         private ProjectFiles.ProjectEntities.Client _Client;
         private IDictionary<string, ProjectFiles.ProjectEntities.Doctor> _Doctors;
-        private IDictionary<string, ProjectFiles.ProjectEntities.ServiceInformation> _Services;
+        private List<ProjectFiles.ProjectEntities.ServiceInformation> _Services;
         public Client()
         {
             InitializeComponent();
@@ -93,18 +93,19 @@ namespace LifeStyle
 
         private void LoadServices()
         {
-            //var services = DBHelper.DbWorker.ExecuteFromDBCommand(
-            //    $"SELECT * FROM services"
-            //    );
+            var services = DBHelper.DbWorker.ExecuteFromDBCommand(
+                $"SELECT * FROM services"
+                );
 
-            //_Services = new Dictionary<string, ProjectFiles.ProjectEntities.ServiceInformation>();
+            _Services = new List<ServiceInformation>();
 
-            //for (int i = 0; i < services.Rows.Count; i++)
-            //{
-            //   // var service = 
+            for (int i = 0; i < services.Rows.Count; i++)
+            {
+                var service = WindowHelper.LoadServices(services, i);
 
-            //    //ServiceListPlace.Children.Add(WindowHelper.CreateServiceCard());
-            //}
+                _Services.Add(service);
+                ServiceListPlace.Children.Add(WindowHelper.CreateServiceCard(_Client,service));
+            }
         }
 
         private void InitializeWindowComponent()
