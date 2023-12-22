@@ -15,7 +15,7 @@
                 <Label Content="Регистрация" FontSize="24" HorizontalAlignment="Center"/>
                 <StackPanel Height="352" Orientation="Vertical">
                     <Label Content="Серия паспорта" FontSize="20" HorizontalAlignment="Left" Margin="100,0"/>
-                    <TextBox x:Name="registration_passport_series" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Center">
+                    <TextBox x:Name="registration_passport_series" Background="#D9D9D9" BorderBrush="Black"  TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>
@@ -23,7 +23,7 @@
                         </TextBox.Resources>
                     </TextBox>
                     <Label Content="Номер паспорта" FontSize="20" HorizontalAlignment="Left" Margin="100,0"/>
-                    <TextBox x:Name="registration_passport_number" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                    <TextBox x:Name="registration_passport_number" Background="#D9D9D9" BorderBrush="Black"  TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>
@@ -31,7 +31,7 @@
                         </TextBox.Resources>
                     </TextBox>
                     <Label Content="Кем выдан" FontSize="20" HorizontalAlignment="Left" Margin="100,0"/>
-                    <TextBox x:Name="registration_passport_from" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                    <TextBox x:Name="registration_passport_from" Background="#D9D9D9" BorderBrush="Black"  TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>
@@ -42,7 +42,7 @@
                         <StackPanel Height="90" Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel Height="100" Orientation="Vertical" Margin="5">
                                 <Label Content="Номер телефона" FontSize="20" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="user_phone_number" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="159" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
+                                <TextBox x:Name="user_phone_number" Background="#D9D9D9" BorderBrush="Black" TextWrapping="NoWrap" Width="159" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="15"/>
@@ -52,7 +52,7 @@
                             </StackPanel>
                             <StackPanel Height="100" Orientation="Vertical" Margin="5">
                                 <Label Content="Адрес" FontSize="20" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="registration_address" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="134" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
+                                <TextBox x:Name="registration_address" Background="#D9D9D9" BorderBrush="Black"  TextWrapping="NoWrap" Width="134" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="15"/>
@@ -62,7 +62,7 @@
                             </StackPanel>
                             <StackPanel Height="100" Orientation="Vertical" Margin="5">
                                 <Label Content="Номер СМП" FontSize="20" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="registration_smp_number" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="123" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
+                                <TextBox x:Name="registration_smp_number" Background="#D9D9D9" BorderBrush="Black" TextWrapping="NoWrap" Width="123" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="15"/>

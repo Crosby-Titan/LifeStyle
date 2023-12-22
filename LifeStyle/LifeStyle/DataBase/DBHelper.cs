@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
 using LifeStyle.Extensions;
+using System.Data;
 
 namespace LifeStyle.DataBase
 {
@@ -53,6 +54,21 @@ namespace LifeStyle.DataBase
                 Environment.Exit(-1);
             }
             
+        }
+
+        /// <summary>
+        /// Проверяет наличие строк в таблице
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns>True если в таблице есть строки, иначе False </returns>
+        public static bool CheckQueryResult(DataTable table)
+        {
+            if (table.Rows.Count < 1)
+            {
+                return false;
+            }
+
+            return true;
         }
 
     }

@@ -44,7 +44,10 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
         {
             return new Client(_FullName.Clone() as string[], _BirthDay, _Email.Clone() as string,_Passport)
             {
-                _VisitHistory = new Dictionary <string, VisitInformation>(_VisitHistory)
+                _VisitHistory = new Dictionary <string, VisitInformation>(_VisitHistory),
+                _Status = _Status,
+                _IsSuperUser = _IsSuperUser,
+                _Passport = _Passport
             };
 
         }

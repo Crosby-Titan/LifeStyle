@@ -15,7 +15,7 @@
                 <Label Content="Регистрация" FontSize="24" HorizontalAlignment="Center"/>
                 <StackPanel Height="375" Orientation="Vertical">
                     <Label Content="Почта" FontSize="20" HorizontalAlignment="Left" Margin="100,0"/>
-                    <TextBox x:Name="user_email_address" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Center">
+                    <TextBox x:Name="user_email_address" Background="#D9D9D9" BorderBrush="Black"  TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>
@@ -23,7 +23,7 @@
                         </TextBox.Resources>
                     </TextBox>
                     <Label Content="Пароль" FontSize="20" HorizontalAlignment="Left" Margin="100,0"/>
-                    <TextBox x:Name="user_password" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                    <TextBox x:Name="user_password" Background="#D9D9D9" BorderBrush="Black"  TextWrapping="NoWrap" Width="300" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="15"/>
@@ -34,7 +34,7 @@
                         <StackPanel Height="90" Orientation="Horizontal" HorizontalAlignment="Center">
                             <StackPanel Height="100" Orientation="Vertical" Margin="5">
                                 <Label Content="Имя" FontSize="20" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="user_name" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="129" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
+                                <TextBox x:Name="user_name" Background="#D9D9D9" BorderBrush="Black" TextWrapping="NoWrap" Width="129" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="15"/>
@@ -44,7 +44,7 @@
                             </StackPanel>
                             <StackPanel Height="100" Orientation="Vertical" Margin="5">
                                 <Label Content="Фамилия" FontSize="20" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="user_second_name" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="134" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
+                                <TextBox x:Name="user_second_name" Background="#D9D9D9" BorderBrush="Black"  TextWrapping="NoWrap" Width="134" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="15"/>
@@ -54,7 +54,7 @@
                             </StackPanel>
                             <StackPanel Height="100" Orientation="Vertical" Margin="5">
                                 <Label Content="Отчество" FontSize="20" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="user_third_name" Background="#D9D9D9" BorderBrush="Black" Text="TextBox" TextWrapping="NoWrap" Width="123" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
+                                <TextBox x:Name="user_third_name" Background="#D9D9D9" BorderBrush="Black"  TextWrapping="NoWrap" Width="123" Height="41" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left">
                                     <TextBox.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="15"/>

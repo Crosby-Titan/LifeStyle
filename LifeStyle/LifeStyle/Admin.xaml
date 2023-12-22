@@ -16,7 +16,7 @@
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="56" Width="100" Margin="0,0,10,0">
             <Label Content="Admin" VerticalContentAlignment="Center"/>
-            <Border x:Name="AdminPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right"/>
+            <Border x:Name="AdminPhoto" CornerRadius="50" Width="50" HorizontalAlignment="Right" RenderOptions.BitmapScalingMode="HighQuality"/>
         </StackPanel>
 
         <Button x:Name="Exit" Content="Выход" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Background="#EFB2D1" BorderThickness="0" Height="26" Width="69" Click="Exit_Click" Margin="0,0,10,7" >

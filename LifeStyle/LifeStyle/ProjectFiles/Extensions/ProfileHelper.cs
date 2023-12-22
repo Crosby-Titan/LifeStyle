@@ -55,6 +55,8 @@ namespace LifeStyle.ProjectFiles.Extensions
 
         public static Entitiy InitializeClient(DataTable entity,int rowLineNumber)
         {
+            if(entity.Rows.Count < 1) return null;
+
             var parameters = new Dictionary<string, string>();
 
             foreach (DataColumn column in entity.Columns)
@@ -93,6 +95,8 @@ namespace LifeStyle.ProjectFiles.Extensions
 
         public static Entitiy InitializeDoctor(DataTable entity, int rowLineNumber)
         {
+            if (entity.Rows.Count < 1) return null;
+
             var parameters = new Dictionary<string, string>();
 
             foreach (DataColumn column in entity.Columns)
@@ -119,6 +123,8 @@ namespace LifeStyle.ProjectFiles.Extensions
 
         public static Entitiy InitializeAdmin(DataTable entity, int rowLineNumber)
         {
+            if (entity.Rows.Count < 1) return null;
+
             var parameters = new Dictionary<string, string>();
 
             foreach (DataColumn column in entity.Columns)

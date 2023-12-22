@@ -61,7 +61,7 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
 
         public void AddExperience(int experience)
         {
-            _CabinetNumber += experience;
+            _Experience += experience;
         }
 
         public void SetEmail(string email)
@@ -92,14 +92,15 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
 
         public override object Clone()
         {
-            return new Doctor(_FullName, _Specialization, _CabinetNumber,_Email)
+            return new Doctor(_FullName.Clone() as string[], _Specialization.Clone() as string, _CabinetNumber.Clone() as string,_Email.Clone() as string)
             {
                 _IsSuperUser = _IsSuperUser,
                 //_DoctorsPhoto = new Uri(_DoctorsPhoto.OriginalString),
                 _ID = _ID,
                 _Experience = _Experience,
                 _PinnedPatients = new LinkedList<Client>(_PinnedPatients),
-                _WorkSchedule = new Dictionary<ScheduleDay, Schedule>(_WorkSchedule)
+                _WorkSchedule = new Dictionary<ScheduleDay, Schedule>(_WorkSchedule),
+                  
             };
         }
     }

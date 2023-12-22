@@ -267,7 +267,7 @@ namespace LifeStyle
 
         private void Admin_Loaded(object sender, RoutedEventArgs e)
         {
-            AdminPhoto.Background = new ImageBrush(new BitmapImage(new Uri(System.IO.Path.Combine(Paths.PathWorker.Icon, "login_icon.png"))));
+            AdminPhoto.Background = new ImageBrush(new BitmapImage(new Uri(System.IO.Path.Combine(Paths.PathWorker.Icon, "admin_default_image_profile.jpg"))));
 
             SetPanelBackground(GetControlsName(AdminPanel), new[] { "services_list_background.jpg", "services_list_background.jpg", "services_list_background.jpg", "doctor_list_background.jpg", "doctor_list_background.jpg" });
         }
