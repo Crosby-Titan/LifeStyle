@@ -27,7 +27,8 @@ namespace LifeStyle
     {
         private ProjectFiles.ProjectEntities.Client _Client;
         private IDictionary<string, ProjectFiles.ProjectEntities.Doctor> _Doctors;
-        private List<ProjectFiles.ProjectEntities.ServiceInformation> _Services;
+        private List<ServiceInformation> _Services;
+        private List<VisitInformation> _Visits;
         public Client()
         {
             InitializeComponent();
@@ -35,21 +36,43 @@ namespace LifeStyle
             this.Loaded += Client_Loaded;
         }
 
+        public Client(Entitiy client) : this()
+        {
+            _Client = client.Clone() as ProjectFiles.ProjectEntities.Client;
+        }
+
         private void Client_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitializeImages();
+            LoadDoctors();
+            LoadServices();
+            LoadVisits();
+            InitializeClientProfile();
+        }
+
+        private void InitializeImages()
         {
             UserProfileImage.Source = new BitmapImage(new Uri(System.IO.Path.Combine(PathWorker.Icon, "default_user_profile_image.jpg")));
             UserPhoto.Background = new ImageBrush(UserProfileImage.Source.Clone());
-            UserName.Content = _Client.FullName;
             NotificationsIcon.Source = new BitmapImage(new Uri(System.IO.Path.Combine(PathWorker.Icon, "notification_icon.png")));
             CloseNotifications.Source = new BitmapImage(new Uri(System.IO.Path.Combine(PathWorker.Icon, "close_icon.png")));
             CloseDocuments.Source = CloseNotifications.Source.Clone();
-            LoadDoctors();
-            LoadServices();
         }
 
-        public Client(Entitiy client): this()
+        private void InitializeClientProfile()
         {
-            _Client = client.Clone() as ProjectFiles.ProjectEntities.Client;
+            UserName.Content = _Client.FullName;
+            string[] fullname = _Client.FullName.Split(' ');
+            UserFirstName.Text = fullname[0];
+            UserSecondName.Text = fullname[1];
+            UserThirdName.Text = fullname[2];
+            var passportData = _Client.Passport;
+            UserPassportFrom.Text = passportData.From;
+            UserPassportNumber.Text = passportData.PassportNumber;
+            UserPassportSeries.Text = passportData.PassportSeries;
+            UserPhoneNumber.Text = passportData.PhoneNumber;
+            UserAddress.Text = passportData.Address;
+            UserSMPNumber.Text = passportData.SMPNumber;
         }
 
         public void SetPanelBackground(ICollection<string> controlsName, ICollection<string> backgroundFile)
@@ -105,6 +128,27 @@ namespace LifeStyle
 
                 _Services.Add(service);
                 ServiceListPlace.Children.Add(WindowHelper.CreateServiceCard(_Client,service));
+            }
+        }
+         
+        private void LoadVisits()
+        {
+            var visits = DBHelper.DbWorker.ExecuteFromDBCommand(
+                $"SELECT fullname_patient,fullname_doctor,cabinet_number,date_and_time,Service,service_list,user_message " +
+                $"FROM Reseption " +
+                $"INNER JOIN Services " +
+                $"ON Reseption.service = Services.id_services " +
+                $"WHERE smpnumber = \'{_Client.Passport.SMPNumber}\'"
+                );
+
+            _Visits = new List<VisitInformation>();
+
+            for (int i = 0; i < visits.Rows.Count; i++)
+            {
+                var visit = WindowHelper.LoadVisit(visits, i);
+
+                _Visits.Add(visit);
+                VisitsListPlace.Children.Add(WindowHelper.CreateVisitCard(visit));
             }
         }
 

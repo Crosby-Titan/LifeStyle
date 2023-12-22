@@ -95,7 +95,7 @@ namespace LifeStyle.ProjectFiles.ProjectEntities
             return new Doctor(_FullName, _Specialization, _CabinetNumber,_Email)
             {
                 _IsSuperUser = _IsSuperUser,
-                _DoctorsPhoto = new Uri(_DoctorsPhoto.OriginalString),
+                //_DoctorsPhoto = new Uri(_DoctorsPhoto.OriginalString),
                 _ID = _ID,
                 _Experience = _Experience,
                 _PinnedPatients = new LinkedList<Client>(_PinnedPatients),

@@ -71,7 +71,7 @@ namespace LifeStyle.Extensions
         {
             XamlReader reader = new XamlReader();
 
-            var xaml = reader.LoadAsync(new FileStream(@"D:\УП\LifeStyle\LifeStyle\XAML\VisitCard.xaml", System.IO.FileMode.Open)) as ResourceDictionary;
+            var xaml = reader.LoadAsync(new FileStream(Path.Combine(PathWorker.XAML,"VisitCard.xaml"), System.IO.FileMode.Open)) as ResourceDictionary;
 
             var visitCard = xaml["VisitCardTemplate"] as Border;
 
@@ -86,7 +86,7 @@ namespace LifeStyle.Extensions
                             $"Описание: {visit.Description}";
                         break;
                     case Button btn:
-                        btn.Content = visit.dateOfVisit.ToShortTimeString();
+                        btn.Content = $"{visit.dateOfVisit.ToShortDateString()}/{visit.dateOfVisit.ToShortTimeString()}";
                         break;
                     case StackPanel panel:
 
@@ -98,7 +98,7 @@ namespace LifeStyle.Extensions
                             }
                             if(innerElement is Border border)
                             {
-                                border.Background = new ImageBrush(new BitmapImage(visit.doctorPhoto));
+                                border.Background = new ImageBrush(new BitmapImage(visit.doctorPhoto ?? new Uri(Path.Combine(PathWorker.Icon, "template_user_profile_image.jpg"))));
                             }
                         }
 
@@ -159,7 +159,7 @@ namespace LifeStyle.Extensions
 
                         break;
                     case Label lbl:
-                        lbl.Content = $"\t\t{service.ServiceName}\n\n\t{service.Description}";
+                        lbl.Content = $" {service.ServiceName} | [{service.ServicePrice} р]";
                         break;
                     case Button btn:
                         btn.Click += (object sender, RoutedEventArgs e) =>
@@ -176,7 +176,7 @@ namespace LifeStyle.Extensions
 
                                 DBHelper.DbWorker.ExecuteIntoDBCommand(
                                     $"INSERT INTO Reseption " +
-                                    $"(fullname_patient,fullname_doctor,specialization_doctor,cabinet_number,date_and_time,Service,Patient_phone_number,SMPNumber) " +
+                                    $"(fullname_patient,fullname_doctor,specialization_doctor,cabinet_number,date_and_time,Service,Patient_phone_number,SMPNumber,user_message) " +
                                     $"VALUES (" +
                                     $"\'{client.FullName}\'," +
                                     $"\'{selectedDoctor}\'," +
@@ -184,12 +184,14 @@ namespace LifeStyle.Extensions
                                     $"(SELECT cabinet_number FROM Doctor WHERE fullname = \'{selectedDoctor}\' LIMIT 1)," +
                                     $"\'{info.dateOfVisit}\'," +
                                     $"(SELECT id_services FROM Services WHERE service_list = \'{service.ServiceName}\' LIMIT 1)," +
-                                    $"{client.Passport.PhoneNumber}," +
-                                    $"{client.Passport.SMPNumber}" +
+                                    $"\'{client.Passport.PhoneNumber}\'," +
+                                    $"\'{client.Passport.SMPNumber}\'," +
+                                    $"\'{info.Description}\'" +
                                     $");"
                                     );
-
                             };
+
+                            selectedService.Show();
 
                         };
                         break;
@@ -278,6 +280,41 @@ namespace LifeStyle.Extensions
             return dataList;
         }
 
+        public static VisitInformation LoadVisit(DataTable visits, int rowsLineNumber)
+        {
+            var visitsList = new Dictionary<string, string>();
+
+            foreach (DataColumn column in visits.Columns)
+            {
+                switch (column.ColumnName)
+                {
+                    case "fullname_patient":
+                    case "fullname_doctor":
+                    case "cabinet_number":
+                    case "date_and_time":
+                    case "service":
+                    case "service_list":
+                    case "user_message":
+                        visitsList.Add(column.ColumnName, visits.Rows[rowsLineNumber][column.Ordinal].ToString());
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+
+            return new VisitInformation
+            {
+                 dateOfVisit = DateTime.Parse(visitsList["date_and_time"]),
+                 fullNameDoctor = visitsList["fullname_doctor"],
+                 fullNamePatient = visitsList["fullname_patient"],
+                 ServiceID = int.Parse(visitsList["service"]),
+                 ServiceName = visitsList["service_list"],
+                 Description = $" Кабинет: {visitsList["cabinet_number"]}\nЖалоба: {visitsList["user_message"]}"
+            };
+        }
+
         public static UIElement CreateRegistrationRequest(object[] data)
         {
 
@@ -326,6 +363,7 @@ namespace LifeStyle.Extensions
 
             return registrationRequest;
         }
+
         public static List<UIElement> CreateRegistrationRequests(List<object[]> data)
         {
             var uiList = new List<UIElement>();
@@ -365,6 +403,69 @@ namespace LifeStyle.Extensions
                 ServiceName = serviceList["service_list"],
                 ServicePrice = decimal.Parse(serviceList["price"]),
                 Specialization = serviceList["specialization"]
+            };
+        }
+
+        public static void SetPanelBackground(ItemsControl panel,ICollection<string> controlsName, ICollection<string> backgroundFile)
+        {
+            for (int i = 0; i < controlsName.Count; i++)
+            {
+                SetPanelBackground(panel,controlsName.ElementAt(i), backgroundFile.ElementAt(i));
+            }
+        }
+
+        public static void SetPanelBackground(ItemsControl panel,string panelName, string filename)
+        {
+            foreach (TabItem item in panel.Items)
+            {
+                if (item.Header.ToString() == panelName)
+                {
+                    WindowHelper.SetPanelBackground(item.Content as Grid, filename);
+                    break;
+                }
+            }
+        }
+
+        public static List<string> GetControlsName(ItemsControl control)
+        {
+            List<string> controlsName = new List<string>();
+
+            foreach (TabItem item in control.Items)
+            {
+                controlsName.Add(item.Header.ToString());
+            }
+
+            return controlsName;
+        }
+
+        public static TableVisitInfo LoadDoctorVisits(DataTable infos,int rowLineNumber)
+        {
+            var info = new Dictionary<string, string>();
+
+            foreach(DataColumn column in infos.Columns)
+            {
+                switch (column.ColumnName)
+                {
+                    case "id_reseption":
+                    case "fullname_patient":
+                    case "date_and_time":
+                    case "user_message":
+                    case "cabinet_number":
+                        info.Add(column.ColumnName, infos.Rows[rowLineNumber][column.Ordinal].ToString());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+
+            return new TableVisitInfo
+            {
+                CabinetNumber = int.Parse(info["cabinet_number"]),
+                dateOfVisit = DateTime.Parse(info["date_and_time"]),
+                Description = info["user_message"],
+                fullNamePatient = info["fullname_patient"],
+                VisitID = int.Parse(info["id_reseption"])
             };
         }
     }

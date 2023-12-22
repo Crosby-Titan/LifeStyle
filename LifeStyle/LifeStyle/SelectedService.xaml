@@ -19,6 +19,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label Content="Дата и время " FontSize="15" Foreground="White"/>
                 <DatePicker x:Name="VisitDate" SelectedDateFormat="Long" Width="127" VerticalAlignment="Center"/>
+                <ComboBox x:Name="VisitTime" Width="100" Margin="5,0,0,0"/>
             </StackPanel>
 
             <Label Content="Жалоба" FontSize="20" HorizontalAlignment="Center" Foreground="White" Margin="20"/>

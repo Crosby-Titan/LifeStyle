@@ -47,19 +47,19 @@ namespace LifeStyle
             {
                 case "Пациент":
 
-                    var data1 = DBHelper.DbWorker.ExecuteFromDBCommand("SELECT * FROM patient_personal_account,Passport");
+                    var data1 = DBHelper.DbWorker.ExecuteFromDBCommand($"SELECT * FROM patient_personal_account,Passport WHERE login = \'{Login.Text}\'");
 
                      Switcher.SwitchWindow(this, new Client(ProfileHelper.InitializeClient(data1,0)));
 
                     break;
                 case "Врач":
-                    var data2 = DBHelper.DbWorker.ExecuteFromDBCommand("SELECT fullname, login, cabinet_number, specialization FROM Doctor");
+                    var data2 = DBHelper.DbWorker.ExecuteFromDBCommand($"SELECT fullname, login, cabinet_number, specialization FROM Doctor WHERE login = '{Login.Text}'");
 
                     Switcher.SwitchWindow(this, new Doctor(ProfileHelper.InitializeDoctor(data2, 0)));
 
                     break;
                 case "Админ":
-                    var data3 = DBHelper.DbWorker.ExecuteFromDBCommand("SELECT login FROM Admin_");
+                    var data3 = DBHelper.DbWorker.ExecuteFromDBCommand($"SELECT login FROM Admin_ WHERE login = '{Login.Text}'");
 
                     Switcher.SwitchWindow(this, new Admin(ProfileHelper.InitializeAdmin(data3,0)));
 
