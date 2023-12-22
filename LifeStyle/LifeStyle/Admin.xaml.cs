@@ -214,7 +214,7 @@ namespace LifeStyle
             PatientFirstName.Text = fullName[0];
             PatientSecondName.Text = fullName[1];
             PatientThirdName.Text = fullName[2];
-            PatientBirthDay.SelectedDate.Value.AddTicks(client.BirthDay.Ticks);
+            PatientBirthDay.SelectedDate = new DateTime(client.BirthDay.Ticks);
         }
 
         private void RegDoctor_Click(object sender, RoutedEventArgs e)

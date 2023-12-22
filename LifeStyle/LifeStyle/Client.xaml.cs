@@ -39,6 +39,7 @@ namespace LifeStyle
         {
             UserProfileImage.Source = new BitmapImage(new Uri(System.IO.Path.Combine(PathWorker.Icon, "default_user_profile_image.jpg")));
             UserPhoto.Background = new ImageBrush(UserProfileImage.Source.Clone());
+            UserName.Content = _Client.FullName;
             NotificationsIcon.Source = new BitmapImage(new Uri(System.IO.Path.Combine(PathWorker.Icon, "notification_icon.png")));
             CloseNotifications.Source = new BitmapImage(new Uri(System.IO.Path.Combine(PathWorker.Icon, "close_icon.png")));
             CloseDocuments.Source = CloseNotifications.Source.Clone();

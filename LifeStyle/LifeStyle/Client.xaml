@@ -14,9 +14,9 @@
     </Window.Background>
     <Grid>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Height="56" Width="120">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Height="52">
             <Label x:Name="UserName" Content="user_name" VerticalContentAlignment="Center"/>
-            <Border x:Name="UserPhoto" CornerRadius="0" Width="50" HorizontalAlignment="Right"/>
+            <Border x:Name="UserPhoto" CornerRadius="54" Width="50" HorizontalAlignment="Right"/>
         </StackPanel>
 
         <TabControl x:Name="UserNavigationPanel" BorderThickness="0" Margin="0,0,0,38">
