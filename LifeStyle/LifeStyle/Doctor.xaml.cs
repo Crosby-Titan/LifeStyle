@@ -42,20 +42,17 @@ namespace LifeStyle
 
         }
 
-       
-        private void cabinet_number_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Cab_Click(object sender, RoutedEventArgs e)
         {
-
+            if (DoctorCabinet.IsReadOnly)
+                DoctorCabinet.IsReadOnly = false;
+            else
+                DoctorCabinet.IsReadOnly = true;
         }
 
         private void PriemKn_Click(object sender, RoutedEventArgs e)
         {
-
+            CurrentVisits.Text = "";
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -65,7 +62,10 @@ namespace LifeStyle
 
         private void EditECP_Click(object sender, RoutedEventArgs e)
         {
-
+            if (ECPList.IsReadOnly)
+                ECPList.IsReadOnly = false;
+            else
+                ECPList.IsReadOnly = true;
         }
 
         private void EditVisits_Click(object sender, RoutedEventArgs e)

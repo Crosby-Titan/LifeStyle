@@ -75,26 +75,6 @@ namespace LifeStyle
             UserSMPNumber.Text = passportData.SMPNumber;
         }
 
-        public void SetPanelBackground(ICollection<string> controlsName, ICollection<string> backgroundFile)
-        {
-            for(int i = 0;i < controlsName.Count;i++)
-            {
-                SetPanelBackground(controlsName.ElementAt(i), backgroundFile.ElementAt(i));
-            }
-        }
-
-        private void SetPanelBackground(string panelName,string filename)
-        {
-            foreach(TabItem item in UserNavigationPanel.Items)
-            {
-                if(item.Header.ToString() == panelName)
-                {
-                    WindowHelper.SetPanelBackground(item.Content as Grid, filename);
-                    break;
-                }
-            }
-        }
-
         private void LoadDoctors()
         {
             var doctors = DBHelper.DbWorker.ExecuteFromDBCommand(
@@ -154,14 +134,7 @@ namespace LifeStyle
 
         private void InitializeWindowComponent()
         {
-            List<string> controlsName = new List<string>();
-
-            foreach(TabItem item in UserNavigationPanel.Items)
-            {
-                controlsName.Add(item.Header.ToString());
-            }
-
-            SetPanelBackground(controlsName, new[] { "default_fon.jpg", "doctor_list_background.jpeg", "services_list_background.jpg", "visit_list_background.jpg" });
+            WindowHelper.SetPanelBackground(UserNavigationPanel,WindowHelper.GetControlsName(UserNavigationPanel), new[] { "default_fon.jpg", "doctor_list_background.jpeg", "services_list_background.jpg", "visit_list_background.jpg" });
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -273,5 +246,7 @@ namespace LifeStyle
         {
             VisitsListPlace.Children.Add(WindowHelper.CreateVisitCard(this));
         }
+
     }
+
 }

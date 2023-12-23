@@ -123,7 +123,7 @@ namespace LifeStyle
         private List<UIElement> SearchSelectedRequests(UIElement element)
         {
             var panel = element as StackPanel;
-            var searchedElements = new List<UIElement>();
+            var foundElements = new List<UIElement>();
 
             foreach(var uiElement in panel.Children)
             {
@@ -131,39 +131,18 @@ namespace LifeStyle
                 {
                     case StackPanel childPanel:
                         if (childPanel.Background is SolidColorBrush brush && brush.Color == (Color)ColorConverter.ConvertFromString("#EFB2D1"))
-                            searchedElements.Add(childPanel);
+                            foundElements.Add(childPanel);
                         break;
                     default:
                         break;
                 }
             }
 
-            return searchedElements;
+            return foundElements;
         }
         private void SetStatus(string email,UserStatus status)
         {
             _AdminPanel.ChangeClientStatus(email, status);
-        }
-
-
-        public void SetPanelBackground(ICollection<string> controlsName, ICollection<string> backgroundFile)
-        {
-            for (int i = 0; i < controlsName.Count; i++)
-            {
-                SetPanelBackground(controlsName.ElementAt(i), backgroundFile.ElementAt(i));
-            }
-        }
-
-        private void SetPanelBackground(string panelName, string filename)
-        {
-            foreach (TabItem item in AdminPanel.Items)
-            {
-                if (item.Header.ToString() == panelName)
-                {
-                    WindowHelper.SetPanelBackground(item.Content as Grid, filename);
-                    break;
-                }
-            }
         }
 
         private void Deny_Click(object sender, RoutedEventArgs e)
@@ -256,24 +235,13 @@ namespace LifeStyle
             });
         }
 
-        private List<string> GetControlsName(ItemsControl control)
-        {
-            List<string> controlsName = new List<string>();
-
-            foreach (TabItem item in control.Items)
-            {
-                controlsName.Add(item.Header.ToString());
-            }
-
-            return controlsName;
-        }
-
         private void Admin_Loaded(object sender, RoutedEventArgs e)
         {
             AdminPhoto.Background = new ImageBrush(new BitmapImage(new Uri(System.IO.Path.Combine(Paths.PathWorker.Icon, "admin_default_image_profile.jpg"))));
 
-            SetPanelBackground(GetControlsName(AdminPanel), new[] { "services_list_background.jpg", "services_list_background.jpg", "services_list_background.jpg", "doctor_list_background.jpg", "doctor_list_background.jpg" });
+            WindowHelper.SetPanelBackground(AdminPanel,
+                WindowHelper.GetControlsName(AdminPanel), 
+                new[] { "services_list_background.jpg", "services_list_background.jpg", "services_list_background.jpg", "doctor_list_background.jpg", "doctor_list_background.jpg" });
         }
-
     }
 }
